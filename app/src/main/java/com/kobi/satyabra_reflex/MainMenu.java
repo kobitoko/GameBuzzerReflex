@@ -1,6 +1,7 @@
 package com.kobi.satyabra_reflex;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.ActionBar;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,9 +17,9 @@ import android.view.WindowManager;
  * To show back button on action bar, dymmeh's answer:
  * http://stackoverflow.com/questions/14483393/how-do-i-change-the-android-actionbar-title-and-icon
  */
-public class MainMenu extends AppCompatActivity {
+public class MainMenu extends Activity {
 
-    private android.support.v7.app.ActionBar actionBar;
+    private ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class MainMenu extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         // https://developer.android.com/guide/topics/ui/actionbar.html
-        actionBar = getSupportActionBar();
+        actionBar = getActionBar();
         actionBar.setTitle(R.string.app_title);
         actionBar.setSubtitle(R.string.app_subtitle_menu);
         setContentView(R.layout.activity_main_menu);
