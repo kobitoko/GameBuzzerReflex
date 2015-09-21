@@ -1,6 +1,7 @@
-# Built application files
-*.apk
-*.ap_
+# gitIgnore help from Lior lluz http://stackoverflow.com/questions/16736856/what-should-be-in-my-gitignore-for-an-android-studio-project
+# Built application files (need apk for assignment 1.)
+#*.apk
+#*.ap_
 
 # Files for the Dalvik VM
 *.dex
@@ -11,6 +12,10 @@
 # Generated files
 bin/
 gen/
+
+# Android Studio
+*.iml
+.idea
 
 # Gradle files
 .gradle/
@@ -25,3 +30,12 @@ proguard/
 
 # Log Files
 *.log
+
+# Windows thumbnail db
+Thumbs.db
+
+# OSX files
+.DS_Store
+
+# ubuntu tmp edits
+*~

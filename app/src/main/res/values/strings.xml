@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">satyabra-reflex</string>
+
+    <string name="app_title">Game Buzzer Coach</string>
+    <string name="app_subtitle_menu"></string>
+    <string name="app_subtitle_singleplayer">Reaction Timer Mode</string>
+    <string name="app_subtitle_multiplayer">Gameshow Buzzer Mode</string>
+    <string name="app_subtitle_stats">Statistics</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Made by Ryan Satyabrata</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
