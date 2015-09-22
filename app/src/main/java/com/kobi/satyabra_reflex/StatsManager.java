@@ -26,7 +26,8 @@ public class StatsManager {
         buzzerCounts = new HashMap<Integer, Integer>();
     }
 
-    // retrieve the statistic manager object
+    // retrieve the statistic manager object using Bill Pugh's Initialization-on-demand holder idiom.
+    // taken from https://en.wikipedia.org/wiki/Singleton_pattern#Initialization-on-demand_holder_idiom
 
 
     // Gets the reaction time from the reaction time records which contains 100 records.
