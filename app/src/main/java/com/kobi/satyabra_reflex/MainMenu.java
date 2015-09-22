@@ -2,6 +2,7 @@ package com.kobi.satyabra_reflex;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -57,17 +58,29 @@ public class MainMenu extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void testLayoutChange(View view) {
+        setContentView(R.layout.activity_main_menu2);
+    }
+
+    public void testLayoutReturn(View view) {
+        setContentView(R.layout.activity_main_menu);
+    }
+
     public void startSingleplayer(View view) {
+
+        Intent intent = new Intent(this, SinglePlayer.class);
+
+
         actionBar.setHomeButtonEnabled(Boolean.TRUE);
         actionBar.setDisplayHomeAsUpEnabled(Boolean.TRUE);
-        setContentView(R.layout.activity_main_menu2);
+
     }
 
     public void startMultiplayer(View view) {
         actionBar.setHomeButtonEnabled(Boolean.FALSE);
         actionBar.setDisplayHomeAsUpEnabled(Boolean.FALSE);
 
-        setContentView(R.layout.activity_main_menu);
+
     }
 
 }
