@@ -1,16 +1,26 @@
 package com.kobi.satyabra_reflex;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 
 public class SinglePlayer extends Activity {
+
+    private ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_player);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        actionBar = getActionBar();
+        actionBar.setTitle(R.string.app_title);
+        actionBar.setSubtitle(R.string.app_subtitle_singleplayer);
+        actionBar.setHomeButtonEnabled(Boolean.TRUE);
+        actionBar.setDisplayHomeAsUpEnabled(Boolean.TRUE);
     }
 
     @Override
@@ -29,6 +39,9 @@ public class SinglePlayer extends Activity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        } else if (id == android.R.id.home) {
+            finish();
             return true;
         }
 

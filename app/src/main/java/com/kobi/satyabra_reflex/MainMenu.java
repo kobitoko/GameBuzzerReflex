@@ -11,12 +11,12 @@ import android.view.WindowManager;
 
 /**
  * https://developer.android.com/guide/topics/ui/actionbar.html
- * http://developer.android.com/guide/topics/data/data-storage.html#pref
  * http://developer.android.com/guide/topics/ui/dialogs.html
  * http://docs.oracle.com/javase/7/docs/api/java/util/Vector.html
  * http://docs.oracle.com/javase/7/docs/api/java/util/Map.html
  * To show back button on action bar, dymmeh's answer:
  * http://stackoverflow.com/questions/14483393/how-do-i-change-the-android-actionbar-title-and-icon
+ * http://www.mkyong.com/android/android-imageview-example/
  */
 public class MainMenu extends Activity {
 
@@ -67,20 +67,13 @@ public class MainMenu extends Activity {
     }
 
     public void startSingleplayer(View view) {
-
         Intent intent = new Intent(this, SinglePlayer.class);
-
-
-        actionBar.setHomeButtonEnabled(Boolean.TRUE);
-        actionBar.setDisplayHomeAsUpEnabled(Boolean.TRUE);
-
+        startActivity(intent);
     }
 
     public void startMultiplayer(View view) {
-        actionBar.setHomeButtonEnabled(Boolean.FALSE);
-        actionBar.setDisplayHomeAsUpEnabled(Boolean.FALSE);
-
-
+        Intent intent = new Intent(this, MultiPlayer.class);
+        startActivity(intent);
     }
 
 }

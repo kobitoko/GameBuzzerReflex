@@ -28,7 +28,13 @@ public class StatsManager {
 
     // retrieve the statistic manager object using Bill Pugh's Initialization-on-demand holder idiom.
     // taken from https://en.wikipedia.org/wiki/Singleton_pattern#Initialization-on-demand_holder_idiom
+    private static class singletonHolder {
+        private static final StatsManager INSTANCE = new StatsManager();
+    }
 
+    public static StatsManager getStats() {
+        return singletonHolder.INSTANCE;
+    }
 
     // Gets the reaction time from the reaction time records which contains 100 records.
     // Returns -1 if invalid index.
@@ -65,5 +71,4 @@ public class StatsManager {
         reactionTimes.clear();
         buzzerCounts.clear();
     }
-
 }
