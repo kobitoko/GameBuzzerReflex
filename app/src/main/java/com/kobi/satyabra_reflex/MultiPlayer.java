@@ -7,6 +7,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
+import com.google.gson.Gson;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+
 public class MultiPlayer extends Activity {
 
     private ActionBar actionBar;
@@ -47,4 +54,20 @@ public class MultiPlayer extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void saveStats() {
+        try {
+            FileOutputStream fos = openFileOutput(StatsManager.FILENAME, MODE_PRIVATE);
+            OutputStreamWriter writer = new OutputStreamWriter(fos);
+            Gson gson = new Gson();
+            gson.toJson(StatsManager.getStats(), writer);
+            writer.flush();
+            fos.close();
+        } catch(FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch(IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

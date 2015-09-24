@@ -7,6 +7,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
+import com.google.gson.Gson;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+
 public class SinglePlayer extends Activity {
 
     private ActionBar actionBar;
@@ -28,6 +35,8 @@ public class SinglePlayer extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_single_player, menu);
         return true;
+
+
     }
 
     @Override
@@ -47,4 +56,20 @@ public class SinglePlayer extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void saveStats() {
+        try {
+            FileOutputStream fos = openFileOutput(StatsManager.FILENAME, MODE_PRIVATE);
+            OutputStreamWriter writer = new OutputStreamWriter(fos);
+            Gson gson = new Gson();
+            gson.toJson(StatsManager.getStats(), writer);
+            writer.flush();
+            fos.close();
+        } catch(FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch(IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

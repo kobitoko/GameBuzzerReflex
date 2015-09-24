@@ -14,7 +14,10 @@ public class StatsManager {
     private Vector<Integer> reactionTimes;
     private Map<Integer, Integer> buzzerCounts;
 
+    public static final String FILENAME = "stats.dat";
+
     // later can iterate through them via for(Integer a : BuzzId.values()){}
+    // this doesnt quite work, cannot access enum in activity.
     public enum BuzzId{ P21, P22,
                         P31, P32, P33,
                         P41, P42, P43, P44 }
@@ -30,6 +33,14 @@ public class StatsManager {
     // taken from https://en.wikipedia.org/wiki/Singleton_pattern#Initialization-on-demand_holder_idiom
     private static class singletonHolder {
         private static final StatsManager INSTANCE = new StatsManager();
+    }
+
+    public Vector<Integer> getReactionTimeData() {
+        return reactionTimes;
+    }
+
+    public Map<Integer, Integer> getBuzzerCountData() {
+        return buzzerCounts;
     }
 
     public static StatsManager getStats() {
@@ -65,6 +76,12 @@ public class StatsManager {
         if(buzzerCounts.containsKey(BuzzId))
             counts += buzzerCounts.get(BuzzId);
         buzzerCounts.put(BuzzId, counts);
+    }
+
+    public void dataClearAndLoad(Vector<Integer> oldReactionTimes, Map<Integer, Integer> oldBuzzerCounts) {
+        clearStatistics();
+        buzzerCounts.putAll(oldBuzzerCounts);
+        reactionTimes.addAll(oldReactionTimes);
     }
 
     public void clearStatistics() {
