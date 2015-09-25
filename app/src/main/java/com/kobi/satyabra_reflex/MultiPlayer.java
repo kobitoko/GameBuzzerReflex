@@ -2,6 +2,7 @@ package com.kobi.satyabra_reflex;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,10 +18,15 @@ import java.io.OutputStreamWriter;
 public class MultiPlayer extends Activity {
 
     private ActionBar actionBar;
+    private StatsManager stats;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Intent intent = getIntent();
+        stats = intent.getParcelableExtra(MainMenu.MESSAGE_STATS);
+
         setContentView(R.layout.activity_multi_player);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         actionBar = getActionBar();
@@ -28,6 +34,7 @@ public class MultiPlayer extends Activity {
         actionBar.setSubtitle(R.string.app_subtitle_multiplayer);
         actionBar.setHomeButtonEnabled(Boolean.TRUE);
         actionBar.setDisplayHomeAsUpEnabled(Boolean.TRUE);
+        // TEST--------------------
         saveStats();
     }
 
@@ -61,7 +68,7 @@ public class MultiPlayer extends Activity {
             FileOutputStream fos = openFileOutput(StatsManager.FILENAME, MODE_PRIVATE);
             OutputStreamWriter writer = new OutputStreamWriter(fos);
             Gson gson = new Gson();
-            gson.toJson(StatsManager.getStats(), writer);
+            gson.toJson(stats, writer);
             writer.flush();
             fos.close();
         } catch(FileNotFoundException e) {

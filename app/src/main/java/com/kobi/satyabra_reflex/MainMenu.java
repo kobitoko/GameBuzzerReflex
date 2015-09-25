@@ -12,38 +12,36 @@ import android.view.WindowManager;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
-import java.io.File;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Vector;
 
 /**
  * References sofar:
  * https://developer.android.com/guide/topics/ui/actionbar.html
  * http://developer.android.com/guide/topics/ui/dialogs.html
  * http://docs.oracle.com/javase/7/docs/api/java/util/Vector.html
- * http://docs.oracle.com/javase/7/docs/api/java/util/Map.html
+ * http://docs.oracle.com/javase/7/docs/api/java/util/HashMap.html
  * To show back button on action bar, dymmeh's answer:
  * http://stackoverflow.com/questions/14483393/how-do-i-change-the-android-actionbar-title-and-icon
  * http://www.mkyong.com/android/android-imageview-example/
- * retrieve the statistic manager object using Bill Pugh's Initialization-on-demand holder idiom.
- * taken from https://en.wikipedia.org/wiki/Singleton_pattern#Initialization-on-demand_holder_idiom
- * saving a singleton
- * http://stackoverflow.com/questions/8361301/how-to-read-and-rewrite-a-singleton-object-from-a-file
+ * http://stackoverflow.com/questions/2139134/how-to-send-an-object-from-one-android-activity-to-another-using-intents
+ * http://developer.android.com/reference/android/os/Parcelable.html
+ * http://stackoverflow.com/questions/10757598/what-classloader-to-use-with-parcel-readhashmap
  */
 public class MainMenu extends Activity {
 
     private ActionBar actionBar;
+    public final static String MESSAGE_STATS = new String("com.kobi.satyabra_reflex.MESSAGE_STATS");
+    private StatsManager stats;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        loadOldStats();
+        loadStats();
 
         //hiding status bar https://developer.android.com/training/system-ui/status.html
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -52,6 +50,7 @@ public class MainMenu extends Activity {
         actionBar = getActionBar();
         actionBar.setTitle(R.string.app_title);
         actionBar.setSubtitle(R.string.app_subtitle_menu);
+
         setContentView(R.layout.activity_main_menu);
     }
 
@@ -91,22 +90,27 @@ public class MainMenu extends Activity {
     }
 
     public void startMultiplayer(View view) {
+
+        // TEST======================
+        stats.addReactionTime(500);
+        stats.addBuzzerCount(StatsManager.BuzzId[2]);
+
         Intent intent = new Intent(this, MultiPlayer.class);
-        StatsManager.getStats().addReactionTime(500);
+        intent.putExtra(MESSAGE_STATS, stats);
         startActivity(intent);
     }
-    // can still try http://stackoverflow.com/questions/8361301/how-to-read-and-rewrite-a-singleton-object-from-a-file
-    // that way of loading instance might work if this edit wont work
-    private void loadOldStats() {
+
+    private void loadStats() {
         try {
             FileInputStream fis = openFileInput(StatsManager.FILENAME);
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
             Gson gson = new Gson();
-            StatsManager.getStats().addOldData(gson.fromJson(in, StatsManager.class));
+            stats = gson.fromJson(in, StatsManager.class);
             fis.close();
             in.close();
         } catch(FileNotFoundException e) {
-            // nothing to do, just start out with clean new data!
+            // start out with clean new data!
+            stats = new StatsManager();
         } catch(IOException e) {
             throw new RuntimeException(e);
         }

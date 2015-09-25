@@ -1,71 +1,88 @@
 package com.kobi.satyabra_reflex;
 
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Vector;
 
 /**
  * Created by kobitoko on 20/09/15.
- * Singleton Statistics manager.
  */
-public class StatsManager {
+public class StatsManager implements Parcelable {
 
-    private static StatsManager statsMan;
-    private Vector<Integer> reactionTimes;
-    private Map<Integer, Integer> buzzerCounts;
+    private ArrayList reactionTimes;
+    private HashMap<Integer, Integer> buzzerCounts;
 
     public static final String FILENAME = "stats.dat";
 
-    // later can iterate through them via for(Integer a : BuzzId.values()){}
-    // this doesnt quite work, cannot access enum in activity.
-    public enum BuzzId{ P21, P22,
-                        P31, P32, P33,
-                        P41, P42, P43, P44 }
+    // later can iterate through them via for(Integer a : BuzzId){}
+    public static final Integer[] BuzzId = new Integer[] {21, 22,
+        31, 32, 33,
+        41, 42, 43, 44};
 
-    // prohibit new creation of instances
-    private StatsManager() {
-        statsMan = new StatsManager();
-        reactionTimes = new Vector<Integer>(100);
-        buzzerCounts = new HashMap<Integer, Integer>();
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    // retrieve the statistic manager object using Bill Pugh's Initialization-on-demand holder idiom.
-    // taken from https://en.wikipedia.org/wiki/Singleton_pattern#Initialization-on-demand_holder_idiom
-    private static class singletonHolder {
-        private static final StatsManager INSTANCE = new StatsManager();
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        // Taken from's hdort answer http://stackoverflow.com/questions/10757598/what-classloader-to-use-with-parcel-readhashmap
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("reactionTimes", reactionTimes);
+        bundle.putSerializable("buzzerCounts", buzzerCounts);
+        dest.writeBundle(bundle);
     }
 
-    public Vector<Integer> getReactionTimeData() {
-        return reactionTimes;
+    // Taken from fiXedd's answer http://stackoverflow.com/questions/2139134/how-to-send-an-object-from-one-android-activity-to-another-using-intents
+    public static final Parcelable.Creator<StatsManager> CREATOR = new Parcelable.Creator<StatsManager>() {
+        public StatsManager createFromParcel(Parcel in) {
+            return new StatsManager(in);
+        }
+
+        public StatsManager[] newArray(int size) {
+            return new StatsManager[size];
+        }
+    };
+
+    public StatsManager() {
+        reactionTimes = new ArrayList(100);
+        buzzerCounts = new HashMap<Integer, Integer>(10);
     }
 
-    public Map<Integer, Integer> getBuzzerCountData() {
-        return buzzerCounts;
-    }
-
-    public static StatsManager getStats() {
-        return singletonHolder.INSTANCE;
+    // Taken from fiXedd's answer http://stackoverflow.com/questions/2139134/how-to-send-an-object-from-one-android-activity-to-another-using-intents
+    // Constructor that takes a Parcel and gives you an object populated with it's values
+    private StatsManager(Parcel in) {
+        // Taken from's hdort answer http://stackoverflow.com/questions/10757598/what-classloader-to-use-with-parcel-readhashmap
+        Bundle bundle = in.readBundle();
+        reactionTimes = (ArrayList) bundle.getSerializable("reactionTimes");
+        buzzerCounts = (HashMap<Integer, Integer>) bundle.getSerializable("buzzerCounts");
     }
 
     // Gets the reaction time from the reaction time records which contains 100 records.
-    // Returns -1 if invalid index.
-    public Integer getReactionTime(Integer index) {
-        if(index >= 100 || index < 0)
-            return -1;
-        return reactionTimes.get(index);
+    public Integer getReactionTime(Integer index) throws RuntimeException {
+        if(index >= 100 || index < 0) {
+            String e = "StatsManager class method getReactionTime index has to be 0 to 99. Index is: " + index.toString();
+            throw new RuntimeException(e);
+        }
+        return (Integer) reactionTimes.get(index);
     }
 
     // adds a reaction time to the reaction time records. Only can hold 100, oldest value gets dropped.
     public void addReactionTime(Integer newReactionTime) {
         reactionTimes.add(newReactionTime);
         if(reactionTimes.size() > 100)
-            reactionTimes.removeElementAt(0);
+            reactionTimes.remove(0);
     }
 
-    // Gets the Buzzer Counts from the Buzzer Player Number (BuzzId). Returns -1 if key doesn't exist.
-    public Integer getBuzzerCount(Integer BuzzId) {
-        if(!buzzerCounts.containsKey(BuzzId))
-            return -1;
+    // Gets the Buzzer Counts from the Buzzer Player Number (BuzzId).
+    public Integer getBuzzerCount(Integer BuzzId) throws RuntimeException {
+        if(!buzzerCounts.containsKey(BuzzId)) {
+            String e = "StatsManager class method getBuzzerCount key doesn't exist. Key is: " + BuzzId.toString();
+            throw new RuntimeException(e);
+        }
         return buzzerCounts.get(BuzzId);
     }
 
@@ -76,21 +93,6 @@ public class StatsManager {
         if(buzzerCounts.containsKey(BuzzId))
             counts += buzzerCounts.get(BuzzId);
         buzzerCounts.put(BuzzId, counts);
-    }
-
-    public void dataClearAndLoad(Vector<Integer> oldReactionTimes, Map<Integer, Integer> oldBuzzerCounts) {
-        clearStatistics();
-        buzzerCounts.putAll(oldBuzzerCounts);
-        reactionTimes.addAll(oldReactionTimes);
-    }
-
-    public void addOldData(StatsManager oldStats) {
-        Map<Integer, Integer> oldMap = new HashMap<Integer, Integer>();
-        Vector<Integer> oldVector = new Vector<Integer>();
-
-        clearStatistics();
-        oldMap.putAll(oldStats.getBuzzerCountData());
-        oldVector.addAll(oldStats.getReactionTimeData());
     }
 
     public void clearStatistics() {
