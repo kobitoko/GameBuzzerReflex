@@ -32,6 +32,8 @@ import java.util.Vector;
  * http://www.mkyong.com/android/android-imageview-example/
  * retrieve the statistic manager object using Bill Pugh's Initialization-on-demand holder idiom.
  * taken from https://en.wikipedia.org/wiki/Singleton_pattern#Initialization-on-demand_holder_idiom
+ * saving a singleton
+ * http://stackoverflow.com/questions/8361301/how-to-read-and-rewrite-a-singleton-object-from-a-file
  */
 public class MainMenu extends Activity {
 
@@ -90,24 +92,23 @@ public class MainMenu extends Activity {
 
     public void startMultiplayer(View view) {
         Intent intent = new Intent(this, MultiPlayer.class);
+        StatsManager.getStats().addReactionTime(500);
         startActivity(intent);
     }
+    // can still try http://stackoverflow.com/questions/8361301/how-to-read-and-rewrite-a-singleton-object-from-a-file
+    // that way of loading instance might work if this edit wont work
     private void loadOldStats() {
-        Map<Integer, Integer> oldMap = new HashMap<Integer, Integer>();
-        Vector<Integer> oldVector = new Vector<Integer>();
         try {
             FileInputStream fis = openFileInput(StatsManager.FILENAME);
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
             Gson gson = new Gson();
-            // DOESNT WORK cuz private constructor! should store the vector and map in gson in one file somehjow?
-            StatsManager oldStats = gson.fromJson(in, StatsManager.class);
-            oldMap.putAll(oldStats.getBuzzerCountData());
-            oldVector.addAll(oldStats.getReactionTimeData());
+            StatsManager.getStats().addOldData(gson.fromJson(in, StatsManager.class));
+            fis.close();
+            in.close();
         } catch(FileNotFoundException e) {
             // nothing to do, just start out with clean new data!
         } catch(IOException e) {
             throw new RuntimeException(e);
         }
-        StatsManager.getStats().dataClearAndLoad(oldVector, oldMap);
     }
 }

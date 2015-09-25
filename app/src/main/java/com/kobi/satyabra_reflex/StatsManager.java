@@ -84,6 +84,15 @@ public class StatsManager {
         reactionTimes.addAll(oldReactionTimes);
     }
 
+    public void addOldData(StatsManager oldStats) {
+        Map<Integer, Integer> oldMap = new HashMap<Integer, Integer>();
+        Vector<Integer> oldVector = new Vector<Integer>();
+
+        clearStatistics();
+        oldMap.putAll(oldStats.getBuzzerCountData());
+        oldVector.addAll(oldStats.getReactionTimeData());
+    }
+
     public void clearStatistics() {
         reactionTimes.clear();
         buzzerCounts.clear();
