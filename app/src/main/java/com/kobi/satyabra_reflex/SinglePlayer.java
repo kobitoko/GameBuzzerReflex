@@ -4,8 +4,10 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 
 import com.google.gson.Gson;
@@ -19,6 +21,7 @@ public class SinglePlayer extends Activity {
 
     private ActionBar actionBar;
     private StatsManager stats;
+    private StopWatch t;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,10 @@ public class SinglePlayer extends Activity {
         actionBar.setSubtitle(R.string.app_subtitle_singleplayer);
         actionBar.setHomeButtonEnabled(Boolean.TRUE);
         actionBar.setDisplayHomeAsUpEnabled(Boolean.TRUE);
+        // TEST--------------------
+        saveStats();
+        t = new StopWatch();
+        t.start();
     }
 
     @Override
@@ -41,8 +48,6 @@ public class SinglePlayer extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_single_player, menu);
         return true;
-
-
     }
 
     @Override
@@ -76,6 +81,13 @@ public class SinglePlayer extends Activity {
         } catch(IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void spBtnFunc(View view) {
+        Integer timeTaken = new Integer(t.stop().intValue());
+        Log.w("---_AAAA_ timer", " timeTaken in ms " + timeTaken.toString());
+        stats.addReactionTime(timeTaken);
+        t.start();
     }
 
 }

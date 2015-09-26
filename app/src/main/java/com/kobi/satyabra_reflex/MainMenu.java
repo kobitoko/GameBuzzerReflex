@@ -30,6 +30,8 @@ import java.io.InputStreamReader;
  * http://stackoverflow.com/questions/2139134/how-to-send-an-object-from-one-android-activity-to-another-using-intents
  * http://developer.android.com/reference/android/os/Parcelable.html
  * http://stackoverflow.com/questions/10757598/what-classloader-to-use-with-parcel-readhashmap
+ * http://developer.android.com/reference/android/os/SystemClock.html
+ * http://stackoverflow.com/questions/14295150/update-activity-constantly
  */
 public class MainMenu extends Activity {
 

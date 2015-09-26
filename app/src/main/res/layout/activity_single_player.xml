@@ -23,6 +23,9 @@
         android:src="@drawable/button"
         android:scaleType="fitCenter"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:focusableInTouchMode="false"
+        android:background="#00ffffff"
+        android:onClick="spBtnFunc" />
 
 </RelativeLayout>

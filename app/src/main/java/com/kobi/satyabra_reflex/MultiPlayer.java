@@ -34,8 +34,6 @@ public class MultiPlayer extends Activity {
         actionBar.setSubtitle(R.string.app_subtitle_multiplayer);
         actionBar.setHomeButtonEnabled(Boolean.TRUE);
         actionBar.setDisplayHomeAsUpEnabled(Boolean.TRUE);
-        // TEST--------------------
-        saveStats();
     }
 
     @Override

@@ -12,7 +12,7 @@ import java.util.HashMap;
  */
 public class StatsManager implements Parcelable {
 
-    private ArrayList reactionTimes;
+    private ArrayList<Integer> reactionTimes;
     private HashMap<Integer, Integer> buzzerCounts;
 
     public static final String FILENAME = "stats.dat";
@@ -48,7 +48,7 @@ public class StatsManager implements Parcelable {
     };
 
     public StatsManager() {
-        reactionTimes = new ArrayList(100);
+        reactionTimes = new ArrayList<Integer>(100);
         buzzerCounts = new HashMap<Integer, Integer>(10);
     }
 
@@ -57,7 +57,7 @@ public class StatsManager implements Parcelable {
     private StatsManager(Parcel in) {
         // Taken from's hdort answer http://stackoverflow.com/questions/10757598/what-classloader-to-use-with-parcel-readhashmap
         Bundle bundle = in.readBundle();
-        reactionTimes = (ArrayList) bundle.getSerializable("reactionTimes");
+        reactionTimes = (ArrayList<Integer>) bundle.getSerializable("reactionTimes");
         buzzerCounts = (HashMap<Integer, Integer>) bundle.getSerializable("buzzerCounts");
     }
 
