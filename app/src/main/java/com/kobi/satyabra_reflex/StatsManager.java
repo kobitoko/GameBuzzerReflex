@@ -67,14 +67,14 @@ public class StatsManager implements Parcelable {
             String e = "StatsManager class method getReactionTime index has to be 0 to 99. Index is: " + index.toString();
             throw new RuntimeException(e);
         }
-        return (Integer) reactionTimes.get(index);
+        return reactionTimes.get(index);
     }
 
     // adds a reaction time to the reaction time records. Only can hold 100, oldest value gets dropped.
     public void addReactionTime(Integer newReactionTime) {
-        reactionTimes.add(newReactionTime);
+        reactionTimes.add(0, newReactionTime);
         if(reactionTimes.size() > 100)
-            reactionTimes.remove(0);
+            reactionTimes.remove(100);
     }
 
     // Gets the Buzzer Counts from the Buzzer Player Number (BuzzId).

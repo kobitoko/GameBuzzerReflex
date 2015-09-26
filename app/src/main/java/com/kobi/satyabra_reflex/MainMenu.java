@@ -15,8 +15,10 @@ import java.io.BufferedReader;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 
 /**
  * References sofar:
@@ -28,6 +30,7 @@ import java.io.InputStreamReader;
  * http://stackoverflow.com/questions/14483393/how-do-i-change-the-android-actionbar-title-and-icon
  * http://www.mkyong.com/android/android-imageview-example/
  * http://stackoverflow.com/questions/2139134/how-to-send-an-object-from-one-android-activity-to-another-using-intents
+ * http://stackoverflow.com/questions/920306/sending-data-back-to-the-main-activity-in-android
  * http://developer.android.com/reference/android/os/Parcelable.html
  * http://stackoverflow.com/questions/10757598/what-classloader-to-use-with-parcel-readhashmap
  * http://developer.android.com/reference/android/os/SystemClock.html
@@ -36,13 +39,14 @@ import java.io.InputStreamReader;
 public class MainMenu extends Activity {
 
     private ActionBar actionBar;
-    public final static String MESSAGE_STATS = new String("com.kobi.satyabra_reflex.MESSAGE_STATS");
+    public final static String MESSAGE_STAT = new String("com.kobi.satyabra_reflex.MESSAGE_STAT");
+    public final static Integer RESULT_STAT = new Integer(42);
     private StatsManager stats;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        stats = new StatsManager();
         loadStats();
 
         //hiding status bar https://developer.android.com/training/system-ui/status.html
@@ -78,6 +82,16 @@ public class MainMenu extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    //Taken from Reto Meier's and jimmithy's answer
+    //from http://stackoverflow.com/questions/920306/sending-data-back-to-the-main-activity-in-android
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == RESULT_STAT && resultCode == Activity.RESULT_OK) {
+            stats = data.getParcelableExtra(MESSAGE_STAT);
+        }
+    }
+
     public void testLayoutChange(View view) {
         setContentView(R.layout.activity_main_menu2);
     }
@@ -88,18 +102,36 @@ public class MainMenu extends Activity {
 
     public void startSingleplayer(View view) {
         Intent intent = new Intent(this, SinglePlayer.class);
-        startActivity(intent);
+        intent.putExtra(MESSAGE_STAT, stats);
+        startActivityForResult(intent, RESULT_STAT);
     }
 
     public void startMultiplayer(View view) {
 
         // TEST======================
-        stats.addReactionTime(500);
         stats.addBuzzerCount(StatsManager.BuzzId[2]);
 
         Intent intent = new Intent(this, MultiPlayer.class);
-        intent.putExtra(MESSAGE_STATS, stats);
-        startActivity(intent);
+        intent.putExtra(MESSAGE_STAT, stats);
+        startActivityForResult(intent, RESULT_STAT);
+    }
+
+    public void startStatistics(View view) {
+
+        //this is not stats real content, just for test
+        try {
+            FileOutputStream fos = openFileOutput(StatsManager.FILENAME, MODE_PRIVATE);
+            OutputStreamWriter writer = new OutputStreamWriter(fos);
+            Gson gson = new Gson();
+            gson.toJson(stats, writer);
+            writer.flush();
+            fos.close();
+        } catch(FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch(IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     private void loadStats() {
@@ -111,8 +143,7 @@ public class MainMenu extends Activity {
             fis.close();
             in.close();
         } catch(FileNotFoundException e) {
-            // start out with clean new data!
-            stats = new StatsManager();
+            // nothing to do
         } catch(IOException e) {
             throw new RuntimeException(e);
         }

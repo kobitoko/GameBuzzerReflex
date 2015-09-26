@@ -22,10 +22,14 @@
         android:id="@+id/buttonReflex"
         android:src="@drawable/button"
         android:scaleType="fitCenter"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentBottom="false"
         android:layout_centerHorizontal="true"
         android:focusableInTouchMode="false"
         android:background="#00ffffff"
-        android:onClick="spBtnFunc" />
+        android:onClick="spBtnFunc"
+        android:adjustViewBounds="false"
+        android:clickable="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="200dp" />
 
 </RelativeLayout>

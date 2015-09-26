@@ -25,10 +25,11 @@ public class MultiPlayer extends Activity {
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
-        stats = intent.getParcelableExtra(MainMenu.MESSAGE_STATS);
+        stats = intent.getParcelableExtra(MainMenu.MESSAGE_STAT);
 
         setContentView(R.layout.activity_multi_player);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                             WindowManager.LayoutParams.FLAG_FULLSCREEN);
         actionBar = getActionBar();
         actionBar.setTitle(R.string.app_title);
         actionBar.setSubtitle(R.string.app_subtitle_multiplayer);
@@ -54,6 +55,10 @@ public class MultiPlayer extends Activity {
         if (id == R.id.action_settings) {
             return true;
         } else if (id == android.R.id.home) {
+            saveStats();
+            Intent resultIntent = new Intent();
+            resultIntent.putExtra(MainMenu.MESSAGE_STAT, stats);
+            setResult(Activity.RESULT_OK, resultIntent);
             finish();
             return true;
         }
