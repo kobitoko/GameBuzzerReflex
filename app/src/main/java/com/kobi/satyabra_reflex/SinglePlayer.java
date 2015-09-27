@@ -22,7 +22,7 @@ import java.util.Random;
 
 public class SinglePlayer extends Activity {
 
-    private final static Integer DURATION_RESULT_DISPLAY = new Integer(3000);
+    private final static Integer DURATION_RESULT_DISPLAY = new Integer(2500);
     private ActionBar actionBar;
     private StatsManager stats;
     private StopWatch t;
@@ -103,7 +103,24 @@ public class SinglePlayer extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void spBtnFunc(View view) {
+    @Override
+    public void onPause() {
+        super.onPause();
+        handler.removeCallbacks(restart);
+        handler.removeCallbacks(start);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setContentView(R.layout.activity_single_player);
+        ImageView imgGo = (ImageView) findViewById(R.id.imageGo);
+        imgGo.setImageResource(R.drawable.wait);
+        canPress = Boolean.FALSE;
+        startReflex();
+    }
+
+    public void buttonBigRed(View view) {
         Long timeTaken = t.stop();
         //Log.w("---_AAAA_ timer", " timeTaken in ms " + timeTaken.toString());
         if(canPress) {

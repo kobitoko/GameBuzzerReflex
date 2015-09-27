@@ -36,11 +36,15 @@ import java.io.OutputStreamWriter;
  * http://stackoverflow.com/questions/10757598/what-classloader-to-use-with-parcel-readhashmap
  * http://developer.android.com/reference/android/os/SystemClock.html
  * http://stackoverflow.com/questions/14295150/update-activity-constantly
+ * http://developer.android.com/reference/android/os/Handler.html
+ * Cmput 301 Labs for Gson saving.
  */
-public class MainMenu extends Activity implements SinglePlayerInstruction.NoticeDialogListener {
+public class MainMenu extends Activity implements SinglePlayerDiag.NoticeDialogListener {
 
     private ActionBar actionBar;
     public final static String MESSAGE_STAT = new String("com.kobi.satyabra_reflex.MESSAGE_STAT");
+    public final static String DIAG_INSTRUCT = new String("InstructionDialogFragment");
+    public final static String DIAG_MP_PLAYERS = new String("MultiplayerNumbersDialogFragment");
     public final static Integer RESULT_STAT = new Integer(42);
     private StatsManager stats;
 
@@ -94,45 +98,37 @@ public class MainMenu extends Activity implements SinglePlayerInstruction.Notice
     }
 
     // Dialog -------------------------------------------
-    // Both dialog functions taken From http://developer.android.com/guide/topics/ui/dialogs.html#PassingEvents
 
-    public void showNoticeDialog() {
+    public void showInstructionDialog() {
         // Create an instance of the dialog fragment and show it
-        DialogFragment dialog = new SinglePlayerInstruction();
-        dialog.show(getFragmentManager(), "NoticeDialogFragment");
+        DialogFragment dialog = new SinglePlayerDiag();
+        dialog.show(getFragmentManager(), DIAG_INSTRUCT);
     }
 
-    // The dialog fragment receives a reference to this Activity through the
-    // Fragment.onAttach() callback, which it uses to call the following methods
-    // defined by the NoticeDialogFragment.NoticeDialogListener interface
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
         // User touched the dialog's positive button
-        Intent intent = new Intent(this, SinglePlayer.class);
-        intent.putExtra(MESSAGE_STAT, stats);
-        startActivityForResult(intent, RESULT_STAT);
+        if(dialog.getTag() == DIAG_INSTRUCT) {
+            Intent intent = new Intent(this, SinglePlayer.class);
+            intent.putExtra(MESSAGE_STAT, stats);
+            startActivityForResult(intent, RESULT_STAT);
+        } else if (dialog.getTag() == DIAG_MP_PLAYERS) {
+            Intent intent = new Intent(this, MultiPlayer.class);
+            intent.putExtra(MESSAGE_STAT, stats);
+            startActivityForResult(intent, RESULT_STAT);
+        }
     }
-
-    /*
-    @Override
-    public void onDialogNegativeClick(DialogFragment dialog) {
-        // User touched the dialog's negative button
-    }*/
 
     // Buttons -------------------------------------------
 
     public void startSingleplayer(View view) {
-        showNoticeDialog();
+        showInstructionDialog();
     }
 
     public void startMultiplayer(View view) {
-
         // TEST======================
-        stats.addBuzzerCount(StatsManager.BuzzId[2]);
+        //stats.addBuzzerCount(StatsManager.BuzzId[2]);
 
-        Intent intent = new Intent(this, MultiPlayer.class);
-        intent.putExtra(MESSAGE_STAT, stats);
-        startActivityForResult(intent, RESULT_STAT);
     }
 
     public void startStatistics(View view) {

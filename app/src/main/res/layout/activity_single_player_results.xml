@@ -13,9 +13,11 @@
         android:layout_height="wrap_content"
         android:text="Meow"
         android:id="@+id/textSpResult"
-        android:textSize="50sp"
+        android:textSize="40dp"
         android:singleLine="false"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:gravity="center" />
+        android:gravity="center"
+        android:typeface="sans"
+        android:textColor="@android:color/black" />
 </RelativeLayout>

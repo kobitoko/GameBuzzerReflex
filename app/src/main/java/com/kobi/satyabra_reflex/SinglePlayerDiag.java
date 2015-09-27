@@ -9,13 +9,15 @@ import android.os.Bundle;
 
 /**
  * Created by Ryan on 2015-09-26.
+ * Taken from http://developer.android.com/guide/topics/ui/dialogs.html
+ * with minor edits
  */
-public class SinglePlayerInstruction extends DialogFragment {
-    // taken from http://developer.android.com/guide/topics/ui/dialogs.html
+public class SinglePlayerDiag extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
         // When the user enters this mode they prompted with information that says they how to supposed to react quickly.
         builder.setTitle("Instructions");
         builder.setMessage("When the text says GO Press the big red button as fast as possible.");
@@ -23,27 +25,18 @@ public class SinglePlayerInstruction extends DialogFragment {
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // Send the positive button event back to the host activity
-                mListener.onDialogPositiveClick(SinglePlayerInstruction.this);
+                mListener.onDialogPositiveClick(SinglePlayerDiag.this);
             }
         });
-        /*builder.setNegativeButton("Cancel Plz Boss", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // User cancelled the dialog
-                        // Send the negative button event back to the host activity
-                        mListener.onDialogNegativeClick(SinglePlayerInstruction.this);
-                    }
-                });*/
         // Create the AlertDialog object and return it
         return builder.create();
     }
 
-    /* Below all taken From http://developer.android.com/guide/topics/ui/dialogs.html#PassingEvents
-     * The activity that creates an instance of this dialog fragment must
+    /* The activity that creates an instance of this dialog fragment must
      * implement this interface in order to receive event callbacks.
      * Each method passes the DialogFragment in case the host needs to query it. */
     public interface NoticeDialogListener {
         public void onDialogPositiveClick(DialogFragment dialog);
-        //public void onDialogNegativeClick(DialogFragment dialog);
     }
 
     // Use this instance of the interface to deliver action events
@@ -59,8 +52,7 @@ public class SinglePlayerInstruction extends DialogFragment {
             mListener = (NoticeDialogListener) activity;
         } catch (ClassCastException e) {
             // The activity doesn't implement the interface, throw exception
-            throw new ClassCastException(activity.toString()
-                    + " must implement NoticeDialogListener");
+            throw new ClassCastException(activity.toString() + " must implement NoticeDialogListener");
         }
     }
 }

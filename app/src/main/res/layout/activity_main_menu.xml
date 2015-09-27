@@ -11,31 +11,31 @@
         android:id="@+id/textView"
         android:gravity="center"
         android:textColor="#000000"
-        android:textSize="50dp"
+        android:textSize="45sp"
         android:typeface="sans"
         android:shadowColor="#0f0f0f"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="20dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_subtitle_singleplayer"
         android:id="@+id/btn_sp"
-        android:padding="30dp"
+        android:padding="20dp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:background="@android:color/holo_blue_bright"
-        android:onClick="startSingleplayer"/>
+        android:onClick="startSingleplayer" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_subtitle_multiplayer"
         android:id="@+id/btn_mp"
-        android:layout_marginTop="20dp"
-        android:padding="30dp"
+        android:layout_marginTop="15dp"
+        android:padding="20dp"
         android:layout_below="@+id/btn_sp"
         android:layout_centerHorizontal="true"
         android:background="@android:color/holo_blue_bright"
@@ -46,11 +46,11 @@
         android:layout_height="wrap_content"
         android:text="@string/app_subtitle_stats"
         android:id="@+id/btn_stat"
-        android:layout_marginTop="20dp"
-        android:padding="30dp"
+        android:padding="20dp"
         android:layout_below="@+id/btn_mp"
         android:layout_centerHorizontal="true"
         android:background="@android:color/holo_blue_bright"
-        android:onClick="startStatistics"/>
+        android:onClick="startStatistics"
+        android:layout_marginTop="15dp" />
 
 </RelativeLayout>
