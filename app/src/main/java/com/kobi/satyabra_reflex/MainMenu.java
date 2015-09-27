@@ -2,6 +2,7 @@ package com.kobi.satyabra_reflex;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -36,7 +37,7 @@ import java.io.OutputStreamWriter;
  * http://developer.android.com/reference/android/os/SystemClock.html
  * http://stackoverflow.com/questions/14295150/update-activity-constantly
  */
-public class MainMenu extends Activity {
+public class MainMenu extends Activity implements SinglePlayerInstruction.NoticeDialogListener {
 
     private ActionBar actionBar;
     public final static String MESSAGE_STAT = new String("com.kobi.satyabra_reflex.MESSAGE_STAT");
@@ -92,18 +93,36 @@ public class MainMenu extends Activity {
         }
     }
 
-    public void testLayoutChange(View view) {
-        setContentView(R.layout.activity_main_menu2);
+    // Dialog -------------------------------------------
+    // Both dialog functions taken From http://developer.android.com/guide/topics/ui/dialogs.html#PassingEvents
+
+    public void showNoticeDialog() {
+        // Create an instance of the dialog fragment and show it
+        DialogFragment dialog = new SinglePlayerInstruction();
+        dialog.show(getFragmentManager(), "NoticeDialogFragment");
     }
 
-    public void testLayoutReturn(View view) {
-        setContentView(R.layout.activity_main_menu);
-    }
-
-    public void startSingleplayer(View view) {
+    // The dialog fragment receives a reference to this Activity through the
+    // Fragment.onAttach() callback, which it uses to call the following methods
+    // defined by the NoticeDialogFragment.NoticeDialogListener interface
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        // User touched the dialog's positive button
         Intent intent = new Intent(this, SinglePlayer.class);
         intent.putExtra(MESSAGE_STAT, stats);
         startActivityForResult(intent, RESULT_STAT);
+    }
+
+    /*
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+        // User touched the dialog's negative button
+    }*/
+
+    // Buttons -------------------------------------------
+
+    public void startSingleplayer(View view) {
+        showNoticeDialog();
     }
 
     public void startMultiplayer(View view) {
@@ -133,6 +152,8 @@ public class MainMenu extends Activity {
         }
 
     }
+
+    // utils -------------------------------------------
 
     private void loadStats() {
         try {
