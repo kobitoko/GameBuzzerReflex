@@ -6,28 +6,30 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 
 /**
- * Created by Ryan on 2015-09-26.
+ * Created by Ryan on 2015-09-28.
  * Taken from http://developer.android.com/guide/topics/ui/dialogs.html
  * with minor edits
  */
-public class SinglePlayerDiag extends DialogFragment {
+public class MultiplayerDiag extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        // When the user enters this mode they prompted with information that says they how to supposed to react quickly.
-        builder.setTitle(R.string.diag_title_instructions);
-        builder.setMessage(R.string.diag_instructions);
-
-        builder.setPositiveButton(R.string.diag_okai, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                // Send the positive button event back to the host activity
-                mListener.onDialogPositiveClick(SinglePlayerDiag.this);
+        builder.setTitle(R.string.diag_mp_players);
+        builder.setItems(R.array.diag_mp, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // For a list choice: the which has the index position of selected choice.
+                // 3 indices, and at least 2 players and at most 4, thus index + 2 = player numbers.
+                MpPlayers.getInstance().setPlayerNumbers(new Integer(which + 2));
+                Log.w("---_AAAA_ multiplayer", "index num " + which + ". Players in Mp" + MpPlayers.getInstance().getPlayerNumbers());
+                mListener.onDialogPositiveClick(MultiplayerDiag.this);
             }
         });
+
         // Create the AlertDialog object and return it
         return builder.create();
     }
@@ -35,12 +37,12 @@ public class SinglePlayerDiag extends DialogFragment {
     /* The activity that creates an instance of this dialog fragment must
      * implement this interface in order to receive event callbacks.
      * Each method passes the DialogFragment in case the host needs to query it. */
-    public interface NoticeDialogListener {
+    public interface MpDialogListener {
         public void onDialogPositiveClick(DialogFragment dialog);
     }
 
     // Use this instance of the interface to deliver action events
-    NoticeDialogListener mListener;
+    MpDialogListener mListener;
 
     // Override the Fragment.onAttach() method to instantiate the NoticeDialogListener
     @Override
@@ -49,10 +51,10 @@ public class SinglePlayerDiag extends DialogFragment {
         // Verify that the host activity implements the callback interface
         try {
             // Instantiate the NoticeDialogListener so we can send events to the host
-            mListener = (NoticeDialogListener) activity;
+            mListener = (MpDialogListener) activity;
         } catch (ClassCastException e) {
             // The activity doesn't implement the interface, throw exception
-            throw new ClassCastException(activity.toString() + " must implement NoticeDialogListener");
+            throw new ClassCastException(activity.toString() + " must implement MpDialogListener");
         }
     }
 }

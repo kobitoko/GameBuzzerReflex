@@ -39,7 +39,8 @@ import java.io.OutputStreamWriter;
  * http://developer.android.com/reference/android/os/Handler.html
  * Cmput 301 Labs for Gson saving.
  */
-public class MainMenu extends Activity implements SinglePlayerDiag.NoticeDialogListener {
+public class MainMenu extends Activity implements SinglePlayerDiag.NoticeDialogListener,
+                                                         MultiplayerDiag.MpDialogListener {
 
     private ActionBar actionBar;
     public final static String MESSAGE_STAT = new String("com.kobi.satyabra_reflex.MESSAGE_STAT");
@@ -105,6 +106,11 @@ public class MainMenu extends Activity implements SinglePlayerDiag.NoticeDialogL
         dialog.show(getFragmentManager(), DIAG_INSTRUCT);
     }
 
+    public void showPlayerAmountAskDialog() {
+        DialogFragment dialog = new MultiplayerDiag();
+        dialog.show(getFragmentManager(), DIAG_MP_PLAYERS);
+    }
+
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
         // User touched the dialog's positive button
@@ -125,11 +131,7 @@ public class MainMenu extends Activity implements SinglePlayerDiag.NoticeDialogL
         showInstructionDialog();
     }
 
-    public void startMultiplayer(View view) {
-        // TEST======================
-        //stats.addBuzzerCount(StatsManager.BuzzId[2]);
-
-    }
+    public void startMultiplayer(View view) { showPlayerAmountAskDialog(); }
 
     public void startStatistics(View view) {
 

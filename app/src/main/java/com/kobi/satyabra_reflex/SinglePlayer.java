@@ -122,7 +122,6 @@ public class SinglePlayer extends Activity {
 
     public void buttonBigRed(View view) {
         Long timeTaken = t.stop();
-        //Log.w("---_AAAA_ timer", " timeTaken in ms " + timeTaken.toString());
         if(canPress) {
             stats.addReactionTime(timeTaken.intValue());
             saveStats();
@@ -142,14 +141,17 @@ public class SinglePlayer extends Activity {
         ImageView imgGo = (ImageView) findViewById(R.id.imageGo);
         imgGo.setImageResource(R.drawable.wait);
 
-        // Actually show results.
+        // Switch view and actually show results.
         setContentView(R.layout.activity_single_player_results);
         TextView resultTxt = (TextView) findViewById(R.id.textSpResult);
-        if(canPress)
-            resultTxt.setText("Your reaction time was: " + stats.getReactionTime(0).toString() + "ms.");
-        else
-            resultTxt.setText("Sorry you pressed too early!");
-
+        TextView valueTxt = (TextView) findViewById(R.id.textSpResultValue);
+        if(canPress) {
+            resultTxt.setText(R.string.sp_results);
+            valueTxt.setText(stats.getReactionTime(0).toString() + "ms");
+        } else {
+            resultTxt.setText(R.string.sp_too_early);
+            valueTxt.setText("");
+        }
         // Taken from ρяσѕρєя K's answer http://stackoverflow.com/questions/14295150/update-activity-constantly
         handler.postDelayed(restart, DURATION_RESULT_DISPLAY);
 

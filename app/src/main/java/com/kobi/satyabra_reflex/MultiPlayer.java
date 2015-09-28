@@ -27,7 +27,21 @@ public class MultiPlayer extends Activity {
         Intent intent = getIntent();
         stats = intent.getParcelableExtra(MainMenu.MESSAGE_STAT);
 
-        setContentView(R.layout.activity_multi_player);
+        Integer pNum = MpPlayers.getInstance().getPlayerNumbers();
+        switch(pNum) {
+            case 2:
+                setContentView(R.layout.activity_multi_player);
+                break;
+            case 3:
+                //setContentView(R.layout.activity_multi_player3);
+                break;
+            case 4:
+                //setContentView(R.layout.activity_multi_player4);
+                break;
+            default:
+                // should not happen
+                break;
+        }
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                              WindowManager.LayoutParams.FLAG_FULLSCREEN);
         actionBar = getActionBar();

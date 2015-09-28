@@ -7,7 +7,7 @@
     tools:context="com.kobi.satyabra_reflex.Statistics"
     android:background="@android:color/holo_blue_light">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
+    <TextView android:text="Hello there." android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
 </RelativeLayout>

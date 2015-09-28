@@ -20,4 +20,21 @@
         android:gravity="center"
         android:typeface="sans"
         android:textColor="@android:color/black" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="9001"
+        android:id="@+id/textSpResultValue"
+        android:textSize="40dp"
+        android:singleLine="false"
+        android:gravity="center"
+        android:typeface="sans"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/textSpResult"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentStart="false"
+        android:layout_alignStart="@id/textSpResult"
+        android:textStyle="bold" />
 </RelativeLayout>

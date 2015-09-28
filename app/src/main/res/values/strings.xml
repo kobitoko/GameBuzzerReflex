@@ -1,18 +1,28 @@
 <resources>
     <string name="app_name">satyabra-reflex</string>
-
     <string name="app_title">Game Buzzer Coach</string>
     <string name="app_subtitle_menu"></string>
     <string name="app_subtitle_singleplayer">Reaction Timer Mode</string>
     <string name="app_subtitle_multiplayer">Gameshow Buzzer Mode</string>
     <string name="app_subtitle_stats">Statistics</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_statistics">Statistics</string>
+    <string name="title_activity_single_player">Single Player</string>
+    <string name="title_activity_multi_player">Multi Player</string>
+
     <string name="action_settings">Made by Ryan Satyabrata</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_statistics">Statistics</string>
-    <string name="title_activity_single_player">SinglePlayer</string>
-    <string name="title_activity_multi_player">MultiPlayer</string>
+    <string name="diag_okai">Ok</string>
+    <string name="diag_title_instructions">Instructions</string>
+    <string name="diag_instructions">When the text says GO Press the big red button as fast as possible.</string>
+    <string name="diag_mp_players">How many players?</string>
+    <array name="diag_mp">
+        <item>2 Players</item>
+        <item>3 Players</item>
+        <item>4 Players</item>
+    </array>
+
+    <string name="sp_too_early">Sorry you pressed too early!</string>
+    <string name="sp_results">Your reaction time was:</string>
+
 </resources>
