@@ -27,7 +27,10 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:background="@android:color/holo_blue_bright"
-        android:onClick="startSingleplayer" />
+        android:onClick="startSingleplayer"
+        android:enabled="true"
+        android:clickable="true"
+        android:singleLine="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -39,7 +42,10 @@
         android:layout_below="@+id/btn_sp"
         android:layout_centerHorizontal="true"
         android:background="@android:color/holo_blue_bright"
-        android:onClick="startMultiplayer"/>
+        android:onClick="startMultiplayer"
+        android:enabled="true"
+        android:clickable="true"
+        android:singleLine="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -51,6 +57,9 @@
         android:layout_centerHorizontal="true"
         android:background="@android:color/holo_blue_bright"
         android:onClick="startStatistics"
-        android:layout_marginTop="15dp" />
+        android:layout_marginTop="15dp"
+        android:enabled="true"
+        android:clickable="true"
+        android:singleLine="true" />
 
 </RelativeLayout>

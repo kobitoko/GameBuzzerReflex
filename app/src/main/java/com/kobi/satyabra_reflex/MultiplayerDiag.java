@@ -6,7 +6,6 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 
 /**
  * Created by Ryan on 2015-09-28.
@@ -25,7 +24,6 @@ public class MultiplayerDiag extends DialogFragment {
                 // For a list choice: the which has the index position of selected choice.
                 // 3 indices, and at least 2 players and at most 4, thus index + 2 = player numbers.
                 MpPlayers.getInstance().setPlayerNumbers(new Integer(which + 2));
-                Log.w("---_AAAA_ multiplayer", "index num " + which + ". Players in Mp" + MpPlayers.getInstance().getPlayerNumbers());
                 mListener.onDialogPositiveClick(MultiplayerDiag.this);
             }
         });

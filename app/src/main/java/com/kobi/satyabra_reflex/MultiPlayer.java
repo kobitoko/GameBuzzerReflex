@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 
 import com.google.gson.Gson;
@@ -33,10 +34,10 @@ public class MultiPlayer extends Activity {
                 setContentView(R.layout.activity_multi_player);
                 break;
             case 3:
-                //setContentView(R.layout.activity_multi_player3);
+                setContentView(R.layout.activity_multi_player3);
                 break;
             case 4:
-                //setContentView(R.layout.activity_multi_player4);
+                setContentView(R.layout.activity_multi_player4);
                 break;
             default:
                 // should not happen
@@ -78,6 +79,24 @@ public class MultiPlayer extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    // Button functions ---------------------------
+
+    public void buttonP1(View view) {
+
+    }
+
+    public void buttonP2(View view) {
+
+    }
+
+    public void buttonP3(View view) {
+
+    }
+
+    public void buttonP4(View view) {
+
     }
 
     private void saveStats() {

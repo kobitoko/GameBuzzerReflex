@@ -1,0 +1,96 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.kobi.satyabra_reflex.MultiPlayer"
+    android:background="@android:color/holo_blue_light">
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:weightSum="2"
+        android:measureWithLargestChild="false"
+        android:layout_alignParentEnd="false"
+        android:baselineAligned="false">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:minHeight="225dp">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonMp1"
+                android:src="@drawable/button"
+                android:scaleType="centerInside"
+                android:focusableInTouchMode="false"
+                android:background="#00ffffff"
+                android:onClick="buttonP1"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:cropToPadding="false"
+                android:layout_column="0"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonMp2"
+                android:src="@drawable/button"
+                android:scaleType="centerInside"
+                android:focusableInTouchMode="false"
+                android:background="#00ffffff"
+                android:onClick="buttonP2"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:cropToPadding="false"
+                android:layout_column="1"
+                android:layout_weight="1" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:minHeight="225dp">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonMp3"
+                android:src="@drawable/button"
+                android:scaleType="centerInside"
+                android:focusableInTouchMode="false"
+                android:background="#00ffffff"
+                android:onClick="buttonP3"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:cropToPadding="false"
+                android:layout_column="0"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonMp4"
+                android:src="@drawable/button"
+                android:scaleType="centerInside"
+                android:focusableInTouchMode="false"
+                android:background="#00ffffff"
+                android:onClick="buttonP4"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:cropToPadding="false"
+                android:layout_column="1"
+                android:layout_weight="1" />
+        </TableRow>
+    </TableLayout>
+
+</RelativeLayout>

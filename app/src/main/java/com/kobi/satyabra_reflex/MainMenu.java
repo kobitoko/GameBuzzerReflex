@@ -37,6 +37,8 @@ import java.io.OutputStreamWriter;
  * http://developer.android.com/reference/android/os/SystemClock.html
  * http://stackoverflow.com/questions/14295150/update-activity-constantly
  * http://developer.android.com/reference/android/os/Handler.html
+ * For Button presses anim
+ * http://developer.android.com/guide/topics/resources/drawable-resource.html#StateList
  * Cmput 301 Labs for Gson saving.
  */
 public class MainMenu extends Activity implements SinglePlayerDiag.NoticeDialogListener,

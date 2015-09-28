@@ -7,4 +7,40 @@
     tools:context="com.kobi.satyabra_reflex.MultiPlayer"
     android:background="@android:color/holo_blue_light">
 
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:weightSum="2"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonMp1"
+            android:src="@drawable/button"
+            android:scaleType="centerInside"
+            android:focusableInTouchMode="false"
+            android:background="#00ffffff"
+            android:onClick="buttonP1"
+            android:adjustViewBounds="false"
+            android:clickable="true"
+            android:cropToPadding="false"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonMp2"
+            android:src="@drawable/button"
+            android:scaleType="centerInside"
+            android:focusableInTouchMode="false"
+            android:background="#00ffffff"
+            android:onClick="buttonP2"
+            android:adjustViewBounds="true"
+            android:clickable="true"
+            android:cropToPadding="false"
+            android:layout_weight="1" />
+
+    </TableLayout>
+
 </RelativeLayout>
