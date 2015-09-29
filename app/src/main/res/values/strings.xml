@@ -25,9 +25,24 @@
     <string name="sp_too_early">Sorry you pressed too early!</string>
     <string name="sp_results">Your reaction time was:</string>
 
-    <string name="mp_p1">Player 1 pressed the button first!</string>
-    <string name="mp_p2">Player 2 pressed the button first!</string>
-    <string name="mp_p3">Player 3 pressed the button first!</string>
-    <string name="mp_p4">Player 4 pressed the button first!</string>
+    <string name="mp_p1"><b>Player 1</b> pressed the button first!</string>
+    <string name="mp_p2"><b>Player 2</b> pressed the button first!</string>
+    <string name="mp_p3"><b>Player 3</b> pressed the button first!</string>
+    <string name="mp_p4"><b>Player 4</b> pressed the button first!</string>
+
+    <string name="stat_max">Slowest Reaction:</string>
+    <string name="stat_min">Fastest Reaction:</string>
+    <string name="stat_avg">Average Reaction:</string>
+    <string name="stat_median">Median Reaction:</string>
+    <string name="stat_alltimes">All times:</string>
+    <string name="stat_10times">Last 10 times:</string>
+    <string name="stat_100times">Last 100 times:</string>
+    <string name="stat_2pmode">2 Player Mode:</string>
+    <string name="stat_3pmode">3 Player Mode:</string>
+    <string name="stat_4pmode">4 Player Mode:</string>
+    <string name="stat_1p">Player1 button presses:</string>
+    <string name="stat_2p">Player2 button presses:</string>
+    <string name="stat_3p">Player3 button presses:</string>
+    <string name="stat_4p">Player4 button presses:</string>
 
 </resources>

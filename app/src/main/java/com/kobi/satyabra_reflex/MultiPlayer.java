@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 
@@ -20,6 +21,7 @@ public class MultiPlayer extends Activity {
 
     private ActionBar actionBar;
     private StatsManager stats;
+    private Integer playerNums;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,21 +30,9 @@ public class MultiPlayer extends Activity {
         Intent intent = getIntent();
         stats = intent.getParcelableExtra(MainMenu.MESSAGE_STAT);
 
-        Integer pNum = MpPlayers.getInstance().getPlayerNumbers();
-        switch(pNum) {
-            case 2:
-                setContentView(R.layout.activity_multi_player);
-                break;
-            case 3:
-                setContentView(R.layout.activity_multi_player3);
-                break;
-            case 4:
-                setContentView(R.layout.activity_multi_player4);
-                break;
-            default:
-                // should not happen
-                break;
-        }
+        playerNums = MpHelper.getInstance().getPlayerNumbers();
+        setViewButtons();
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                              WindowManager.LayoutParams.FLAG_FULLSCREEN);
         actionBar = getActionBar();
@@ -71,6 +61,7 @@ public class MultiPlayer extends Activity {
             return true;
         } else if (id == android.R.id.home) {
             saveStats();
+            MpHelper.getInstance().playerCanPressReset();
             Intent resultIntent = new Intent();
             resultIntent.putExtra(MainMenu.MESSAGE_STAT, stats);
             setResult(Activity.RESULT_OK, resultIntent);
@@ -84,19 +75,111 @@ public class MultiPlayer extends Activity {
     // Button functions ---------------------------
 
     public void buttonP1(View view) {
-
+        switch(playerNums) {
+            case 2:
+                stats.addBuzzerCount(StatsManager.BuzzId[0]);
+                break;
+            case 3:
+                stats.addBuzzerCount(StatsManager.BuzzId[2]);
+                break;
+            case 4:
+                stats.addBuzzerCount(StatsManager.BuzzId[5]);
+                break;
+        }
+        if(MpHelper.getInstance().playerCanPress()) {
+            MpHelper.getInstance().setPlayerFirst(1);
+            showResults();
+        }
     }
 
     public void buttonP2(View view) {
-
+        switch(playerNums) {
+            case 2:
+                stats.addBuzzerCount(StatsManager.BuzzId[1]);
+                break;
+            case 3:
+                stats.addBuzzerCount(StatsManager.BuzzId[3]);
+                break;
+            case 4:
+                stats.addBuzzerCount(StatsManager.BuzzId[6]);
+                break;
+        }
+        if(MpHelper.getInstance().playerCanPress()) {
+            MpHelper.getInstance().setPlayerFirst(2);
+            showResults();
+     }
     }
 
     public void buttonP3(View view) {
-
+        switch(playerNums) {
+            case 3:
+                stats.addBuzzerCount(StatsManager.BuzzId[4]);
+                break;
+            case 4:
+                stats.addBuzzerCount(StatsManager.BuzzId[7]);
+                break;
+        }
+        if(MpHelper.getInstance().playerCanPress()) {
+            MpHelper.getInstance().setPlayerFirst(3);
+            showResults();
+        }
     }
 
     public void buttonP4(View view) {
+        switch(playerNums) {
+            case 2:
+                stats.addBuzzerCount(StatsManager.BuzzId[8]);
+        }
+        if(MpHelper.getInstance().playerCanPress()) {
+            MpHelper.getInstance().setPlayerFirst(4);
+            showResults();
+        }
+    }
 
+    public void resetMp(View view) {
+        MpHelper.getInstance().playerCanPressReset();
+        setViewButtons();
+    }
+
+    //-------
+    private void setViewButtons() {
+        switch (playerNums) {
+            case 2:
+                setContentView(R.layout.activity_multi_player);
+                break;
+            case 3:
+                setContentView(R.layout.activity_multi_player3);
+                break;
+            case 4:
+                setContentView(R.layout.activity_multi_player4);
+                break;
+            default:
+                // should not happen
+                break;
+        }
+    }
+
+    private void showResults() {
+        setContentView(R.layout.activity_multi_player_results);
+        TextView resultTxt = (TextView) findViewById(R.id.textMpResult);
+        switch(MpHelper.getInstance().getPlayerFirst()) {
+            case 1:
+                resultTxt.setText(R.string.mp_p1);
+                break;
+            case 2:
+                resultTxt.setText(R.string.mp_p2);
+                break;
+            case 3:
+                resultTxt.setText(R.string.mp_p3);
+                break;
+            case 4:
+                resultTxt.setText(R.string.mp_p4);
+                break;
+            default:
+                // should never happen
+                resultTxt.setText("Something went very wrong... Try again.");
+                break;
+        }
     }
 
     private void saveStats() {

@@ -63,26 +63,26 @@ public class StatsManager implements Parcelable {
 
     // Gets the reaction time from the reaction time records which contains 100 records.
     public Integer getReactionTime(Integer index) throws RuntimeException {
-        if(index >= 100 || index < 0) {
-            String e = "StatsManager class method getReactionTime index has to be 0 to 99. Index is: " + index.toString();
+        if(index < 0) {
+            String e = "StatsManager class method getReactionTime index has to be positive. Index is: " + index.toString();
             throw new RuntimeException(e);
         }
         return reactionTimes.get(index);
     }
 
-    // adds a reaction time to the reaction time records. Only can hold 100, oldest value gets dropped.
-    public void addReactionTime(Integer newReactionTime) {
-        reactionTimes.add(0, newReactionTime);
-        if(reactionTimes.size() > 100)
-            reactionTimes.remove(100);
+    public Integer reactionTimeSize() {
+        return reactionTimes.size();
     }
 
-    // Gets the Buzzer Counts from the Buzzer Player Number (BuzzId).
-    public Integer getBuzzerCount(Integer BuzzId) throws RuntimeException {
-        if(!buzzerCounts.containsKey(BuzzId)) {
-            String e = "StatsManager class method getBuzzerCount key doesn't exist. Key is: " + BuzzId.toString();
-            throw new RuntimeException(e);
-        }
+    // adds a reaction time to the reaction time records.
+    public void addReactionTime(Integer newReactionTime) {
+        reactionTimes.add(0, newReactionTime);
+    }
+
+    // Gets the Buzzer Counts from the Buzzer Player Number (BuzzId), if doesn't exist it returns -1.
+    public Integer getBuzzerCount(Integer BuzzId) {
+        if(!buzzerCounts.containsKey(BuzzId))
+            return -1;
         return buzzerCounts.get(BuzzId);
     }
 

@@ -23,7 +23,7 @@ public class MultiplayerDiag extends DialogFragment {
             public void onClick(DialogInterface dialog, int which) {
                 // For a list choice: the which has the index position of selected choice.
                 // 3 indices, and at least 2 players and at most 4, thus index + 2 = player numbers.
-                MpPlayers.getInstance().setPlayerNumbers(new Integer(which + 2));
+                MpHelper.getInstance().setPlayerNumbers(new Integer(which + 2));
                 mListener.onDialogPositiveClick(MultiplayerDiag.this);
             }
         });
