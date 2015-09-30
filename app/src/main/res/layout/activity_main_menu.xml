@@ -26,11 +26,11 @@
         android:padding="20dp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:background="@android:color/holo_blue_bright"
         android:onClick="startSingleplayer"
         android:enabled="true"
         android:clickable="true"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:background="@android:color/holo_blue_bright" />
 
     <Button
         android:layout_width="wrap_content"

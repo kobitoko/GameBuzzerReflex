@@ -7,7 +7,50 @@
     tools:context="com.kobi.satyabra_reflex.Statistics"
     android:background="@android:color/holo_blue_light">
 
-    <TextView android:text="Hello there." android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/scrollView" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_alignParentStart="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa "
+                android:id="@+id/textView2"
+                android:layout_gravity="center_horizontal" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/stat_email"
+                android:id="@+id/buttonStatsEmail"
+                android:textColor="@android:color/black"
+                android:paddingRight="30dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:background="@android:color/holo_blue_bright" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/stat_clear"
+                android:id="@+id/buttonStatsClear"
+                android:layout_marginTop="30dp"
+                android:textColor="@android:color/holo_red_dark"
+                android:singleLine="false"
+                android:layout_marginBottom="10dp" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

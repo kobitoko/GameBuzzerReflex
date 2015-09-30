@@ -10,17 +10,9 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-
-public class MultiPlayer extends Activity {
+public class MultiPlayer extends FileManager {
 
     private ActionBar actionBar;
-    private StatsManager stats;
     private Integer playerNums;
 
     @Override
@@ -160,6 +152,7 @@ public class MultiPlayer extends Activity {
     }
 
     private void showResults() {
+        saveStats();
         setContentView(R.layout.activity_multi_player_results);
         TextView resultTxt = (TextView) findViewById(R.id.textMpResult);
         switch(MpHelper.getInstance().getPlayerFirst()) {
@@ -179,21 +172,6 @@ public class MultiPlayer extends Activity {
                 // should never happen
                 resultTxt.setText("Something went very wrong... Try again.");
                 break;
-        }
-    }
-
-    private void saveStats() {
-        try {
-            FileOutputStream fos = openFileOutput(StatsManager.FILENAME, MODE_PRIVATE);
-            OutputStreamWriter writer = new OutputStreamWriter(fos);
-            Gson gson = new Gson();
-            gson.toJson(stats, writer);
-            writer.flush();
-            fos.close();
-        } catch(FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch(IOException e) {
-            throw new RuntimeException(e);
         }
     }
 

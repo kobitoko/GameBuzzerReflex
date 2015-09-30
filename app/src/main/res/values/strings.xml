@@ -44,5 +44,7 @@
     <string name="stat_2p">Player2 button presses:</string>
     <string name="stat_3p">Player3 button presses:</string>
     <string name="stat_4p">Player4 button presses:</string>
+    <string name="stat_email">Email Statistics</string>
+    <string name="stat_clear">Clear Statistics</string>
 
 </resources>

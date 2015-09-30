@@ -12,19 +12,12 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.util.Random;
 
-public class SinglePlayer extends Activity {
+public class SinglePlayer extends FileManager {
 
     private final static Integer DURATION_RESULT_DISPLAY = new Integer(2500);
     private ActionBar actionBar;
-    private StatsManager stats;
     private StopWatch t;
     private Runnable restart, start;
     private Handler handler;
@@ -157,21 +150,6 @@ public class SinglePlayer extends Activity {
 
         // Reset the reaction state.
         canPress = Boolean.FALSE;
-    }
-
-    private void saveStats() {
-        try {
-            FileOutputStream fos = openFileOutput(StatsManager.FILENAME, MODE_PRIVATE);
-            OutputStreamWriter writer = new OutputStreamWriter(fos);
-            Gson gson = new Gson();
-            gson.toJson(stats, writer);
-            writer.flush();
-            fos.close();
-        } catch(FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch(IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 }

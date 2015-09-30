@@ -10,17 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.google.gson.Gson;
-
-import java.io.BufferedReader;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-
 /**
  * References sofar:
  * https://developer.android.com/guide/topics/ui/actionbar.html
@@ -41,7 +30,7 @@ import java.io.OutputStreamWriter;
  * http://developer.android.com/guide/topics/resources/drawable-resource.html#StateList
  * Cmput 301 Labs for Gson saving.
  */
-public class MainMenu extends Activity implements SinglePlayerDiag.NoticeDialogListener,
+public class MainMenu extends FileManager implements SinglePlayerDiag.NoticeDialogListener,
                                                          MultiplayerDiag.MpDialogListener {
 
     private ActionBar actionBar;
@@ -49,7 +38,6 @@ public class MainMenu extends Activity implements SinglePlayerDiag.NoticeDialogL
     public final static String DIAG_INSTRUCT = new String("InstructionDialogFragment");
     public final static String DIAG_MP_PLAYERS = new String("MultiplayerNumbersDialogFragment");
     public final static Integer RESULT_STAT = new Integer(42);
-    private StatsManager stats;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,37 +124,9 @@ public class MainMenu extends Activity implements SinglePlayerDiag.NoticeDialogL
     public void startMultiplayer(View view) { showPlayerAmountAskDialog(); }
 
     public void startStatistics(View view) {
-
-        //this is not stats real content, just for test
-        try {
-            FileOutputStream fos = openFileOutput(StatsManager.FILENAME, MODE_PRIVATE);
-            OutputStreamWriter writer = new OutputStreamWriter(fos);
-            Gson gson = new Gson();
-            gson.toJson(stats, writer);
-            writer.flush();
-            fos.close();
-        } catch(FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch(IOException e) {
-            throw new RuntimeException(e);
-        }
-
+        Intent intent = new Intent(this, Statistics.class);
+        intent.putExtra(MESSAGE_STAT, stats);
+        startActivityForResult(intent, RESULT_STAT);
     }
 
-    // utils -------------------------------------------
-
-    private void loadStats() {
-        try {
-            FileInputStream fis = openFileInput(StatsManager.FILENAME);
-            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-            Gson gson = new Gson();
-            stats = gson.fromJson(in, StatsManager.class);
-            fis.close();
-            in.close();
-        } catch(FileNotFoundException e) {
-            // nothing to do
-        } catch(IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
