@@ -23,9 +23,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa aaaaa \n dfsasa "
-                android:id="@+id/textView2"
-                android:layout_gravity="center_horizontal" />
+                android:text="statistics are displayed here"
+                android:id="@+id/textStatistics"
+                android:layout_gravity="center_horizontal"
+                android:typeface="sans" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -38,7 +39,8 @@
                 android:paddingBottom="10dp"
                 android:paddingLeft="30dp"
                 android:layout_marginTop="20dp"
-                android:background="@android:color/holo_blue_bright" />
+                android:background="@android:color/holo_blue_bright"
+                android:onClick="buttonEmail" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -48,7 +50,8 @@
                 android:layout_marginTop="30dp"
                 android:textColor="@android:color/holo_red_dark"
                 android:singleLine="false"
-                android:layout_marginBottom="10dp" />
+                android:layout_marginBottom="10dp"
+                android:onClick="buttonClearStats" />
 
         </LinearLayout>
     </ScrollView>
