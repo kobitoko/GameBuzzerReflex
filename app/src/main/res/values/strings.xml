@@ -37,6 +37,7 @@
     <string name="stat_alltimes">All times:</string>
     <string name="stat_10times">Last 10 times:</string>
     <string name="stat_100times">Last 100 times:</string>
+    <string name="stat_buzzer_counts">Buzzer counts:</string>
     <string name="stat_2pmode">2 Player Mode:</string>
     <string name="stat_3pmode">3 Player Mode:</string>
     <string name="stat_4pmode">4 Player Mode:</string>

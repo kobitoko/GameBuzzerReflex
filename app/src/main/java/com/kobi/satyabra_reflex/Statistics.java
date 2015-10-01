@@ -124,6 +124,29 @@ public class Statistics extends FileManager {
         text += getString(R.string.stat_100times) + " ";
         text += stats.getMedianReaction100().toString() + "ms\n\n";
 
+        // Multiplayer Buzzer
+        text += getString(R.string.stat_buzzer_counts) + "\n  ";
+        text += getString(R.string.stat_2pmode) + "\n    ";
+        text += getString(R.string.stat_1p) + " ";
+        text += stats.getBuzzerCount(StatsManager.BuzzId.p21).toString() + "\n    ";
+        text += getString(R.string.stat_2p) + " ";
+        text += stats.getBuzzerCount(StatsManager.BuzzId.p22).toString() + "\n  ";
+        text += getString(R.string.stat_3pmode) + "\n    ";
+        text += getString(R.string.stat_1p) + " ";
+        text += stats.getBuzzerCount(StatsManager.BuzzId.p31).toString() + "\n    ";
+        text += getString(R.string.stat_2p) + " ";
+        text += stats.getBuzzerCount(StatsManager.BuzzId.p32).toString() + "\n    ";
+        text += getString(R.string.stat_3p) + " ";
+        text += stats.getBuzzerCount(StatsManager.BuzzId.p33).toString() + "\n  ";
+        text += getString(R.string.stat_4pmode) + "\n    ";
+        text += getString(R.string.stat_1p) + " ";
+        text += stats.getBuzzerCount(StatsManager.BuzzId.p41).toString() + "\n    ";
+        text += getString(R.string.stat_2p) + " ";
+        text += stats.getBuzzerCount(StatsManager.BuzzId.p42).toString() + "\n    ";
+        text += getString(R.string.stat_3p) + " ";
+        text += stats.getBuzzerCount(StatsManager.BuzzId.p43).toString() + "\n    ";
+        text += getString(R.string.stat_4p) + " ";
+        text += stats.getBuzzerCount(StatsManager.BuzzId.p44).toString() + "\n  ";
         return text;
     }
 

@@ -69,13 +69,13 @@ public class MultiPlayer extends FileManager {
     public void buttonP1(View view) {
         switch(playerNums) {
             case 2:
-                stats.addBuzzerCount(StatsManager.BuzzId[0]);
+                stats.addBuzzerCount(StatsManager.BuzzId.p21);
                 break;
             case 3:
-                stats.addBuzzerCount(StatsManager.BuzzId[2]);
+                stats.addBuzzerCount(StatsManager.BuzzId.p31);
                 break;
             case 4:
-                stats.addBuzzerCount(StatsManager.BuzzId[5]);
+                stats.addBuzzerCount(StatsManager.BuzzId.p41);
                 break;
         }
         if(MpHelper.getInstance().playerCanPress()) {
@@ -87,13 +87,13 @@ public class MultiPlayer extends FileManager {
     public void buttonP2(View view) {
         switch(playerNums) {
             case 2:
-                stats.addBuzzerCount(StatsManager.BuzzId[1]);
+                stats.addBuzzerCount(StatsManager.BuzzId.p22);
                 break;
             case 3:
-                stats.addBuzzerCount(StatsManager.BuzzId[3]);
+                stats.addBuzzerCount(StatsManager.BuzzId.p32);
                 break;
             case 4:
-                stats.addBuzzerCount(StatsManager.BuzzId[6]);
+                stats.addBuzzerCount(StatsManager.BuzzId.p42);
                 break;
         }
         if(MpHelper.getInstance().playerCanPress()) {
@@ -105,10 +105,10 @@ public class MultiPlayer extends FileManager {
     public void buttonP3(View view) {
         switch(playerNums) {
             case 3:
-                stats.addBuzzerCount(StatsManager.BuzzId[4]);
+                stats.addBuzzerCount(StatsManager.BuzzId.p33);
                 break;
             case 4:
-                stats.addBuzzerCount(StatsManager.BuzzId[7]);
+                stats.addBuzzerCount(StatsManager.BuzzId.p43);
                 break;
         }
         if(MpHelper.getInstance().playerCanPress()) {
@@ -119,8 +119,8 @@ public class MultiPlayer extends FileManager {
 
     public void buttonP4(View view) {
         switch(playerNums) {
-            case 2:
-                stats.addBuzzerCount(StatsManager.BuzzId[8]);
+            case 4:
+                stats.addBuzzerCount(StatsManager.BuzzId.p44);
         }
         if(MpHelper.getInstance().playerCanPress()) {
             MpHelper.getInstance().setPlayerFirst(4);
