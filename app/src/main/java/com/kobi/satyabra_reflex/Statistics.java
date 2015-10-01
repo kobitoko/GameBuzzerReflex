@@ -14,10 +14,13 @@ import android.widget.Toast;
 public class Statistics extends FileManager {
 
     private ActionBar actionBar;
+    private StatsCalculator calc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        calc = new StatsCalculator();
 
         Intent intent = getIntent();
         stats = intent.getParcelableExtra(MainMenu.MESSAGE_STAT);
@@ -99,38 +102,38 @@ public class Statistics extends FileManager {
         // Minimum
         text += getString(R.string.stat_min) + "\n  ";
         text += getString(R.string.stat_alltimes) + " ";
-        text += stats.getFastestReaction().toString() + "ms\n  ";
+        text += calc.getFastestReaction(stats.getReactionTimesList()).toString() + "ms\n  ";
         text += getString(R.string.stat_10times) + " ";
-        text += stats.getFastestReaction10().toString() + "ms\n  ";
+        text += calc.getFastestReaction10(stats.getReactionTimesList()).toString() + "ms\n  ";
         text += getString(R.string.stat_100times) + " ";
-        text += stats.getFastestReaction100().toString() + "ms\n\n";
+        text += calc.getFastestReaction100(stats.getReactionTimesList()).toString() + "ms\n\n";
 
         // Maximum
         text += getString(R.string.stat_max) + "\n  ";
         text += getString(R.string.stat_alltimes) + " ";
-        text += stats.getSlowestReaction().toString() + "ms\n  ";
+        text += calc.getSlowestReaction(stats.getReactionTimesList()).toString() + "ms\n  ";
         text += getString(R.string.stat_10times) + " ";
-        text += stats.getSlowestReaction10().toString() + "ms\n  ";
+        text += calc.getSlowestReaction10(stats.getReactionTimesList()).toString() + "ms\n  ";
         text += getString(R.string.stat_100times) + " ";
-        text += stats.getSlowestReaction100().toString() + "ms\n\n";
+        text += calc.getSlowestReaction100(stats.getReactionTimesList()).toString() + "ms\n\n";
 
         // Average
         text += getString(R.string.stat_avg) + "\n  ";
         text += getString(R.string.stat_alltimes) + " ";
-        text += stats.getAverageReaction().toString() + "ms\n  ";
+        text += calc.getAverageReaction(stats.getReactionTimesList()).toString() + "ms\n  ";
         text += getString(R.string.stat_10times) + " ";
-        text += stats.getAverageReaction10().toString() + "ms\n  ";
+        text += calc.getAverageReaction10(stats.getReactionTimesList()).toString() + "ms\n  ";
         text += getString(R.string.stat_100times) + " ";
-        text += stats.getAverageReaction100().toString() + "ms\n\n";
+        text += calc.getAverageReaction100(stats.getReactionTimesList()).toString() + "ms\n\n";
 
         // Median
         text += getString(R.string.stat_median) + "\n  ";
         text += getString(R.string.stat_alltimes) + " ";
-        text += stats.getMedianReaction().toString() + "ms\n  ";
+        text += calc.getMedianReaction(stats.getReactionTimesList()).toString() + "ms\n  ";
         text += getString(R.string.stat_10times) + " ";
-        text += stats.getMedianReaction10().toString() + "ms\n  ";
+        text += calc.getMedianReaction10(stats.getReactionTimesList()).toString() + "ms\n  ";
         text += getString(R.string.stat_100times) + " ";
-        text += stats.getMedianReaction100().toString() + "ms\n\n";
+        text += calc.getMedianReaction100(stats.getReactionTimesList()).toString() + "ms\n\n";
 
         // Multiplayer Buzzer
         text += getString(R.string.stat_buzzer_counts) + "\n  ";
