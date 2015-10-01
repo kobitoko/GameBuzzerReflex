@@ -73,6 +73,11 @@ public class SinglePlayer extends FileManager {
     }
 
     @Override
+    public void onBackPressed() {
+        finishSinglePlayer();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -83,13 +88,7 @@ public class SinglePlayer extends FileManager {
         if (id == R.id.action_settings) {
             return true;
         } else if (id == android.R.id.home) {
-            saveStats();
-            handler.removeCallbacks(restart);
-            handler.removeCallbacks(start);
-            Intent resultIntent = new Intent();
-            resultIntent.putExtra(MainMenu.MESSAGE_STAT, stats);
-            setResult(Activity.RESULT_OK, resultIntent);
-            finish();
+            finishSinglePlayer();
             return true;
         }
 
@@ -150,6 +149,16 @@ public class SinglePlayer extends FileManager {
 
         // Reset the reaction state.
         canPress = Boolean.FALSE;
+    }
+
+    private void finishSinglePlayer() {
+        saveStats();
+        handler.removeCallbacks(restart);
+        handler.removeCallbacks(start);
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra(MainMenu.MESSAGE_STAT, stats);
+        setResult(Activity.RESULT_OK, resultIntent);
+        finish();
     }
 
 }

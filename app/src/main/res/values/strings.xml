@@ -41,10 +41,10 @@
     <string name="stat_2pmode">2 Player Mode:</string>
     <string name="stat_3pmode">3 Player Mode:</string>
     <string name="stat_4pmode">4 Player Mode:</string>
-    <string name="stat_1p">Player1 button presses:</string>
-    <string name="stat_2p">Player2 button presses:</string>
-    <string name="stat_3p">Player3 button presses:</string>
-    <string name="stat_4p">Player4 button presses:</string>
+    <string name="stat_1p">Player 1:</string>
+    <string name="stat_2p">Player 2:</string>
+    <string name="stat_3p">Player 3:</string>
+    <string name="stat_4p">Player 4:</string>
     <string name="stat_email">Email Statistics</string>
     <string name="stat_clear">Clear Statistics</string>
 

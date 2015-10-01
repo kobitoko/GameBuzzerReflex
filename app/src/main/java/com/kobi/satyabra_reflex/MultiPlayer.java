@@ -42,6 +42,11 @@ public class MultiPlayer extends FileManager {
     }
 
     @Override
+    public void onBackPressed() {
+        finishMultiPlayer();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -52,12 +57,7 @@ public class MultiPlayer extends FileManager {
         if (id == R.id.action_settings) {
             return true;
         } else if (id == android.R.id.home) {
-            saveStats();
-            MpHelper.getInstance().playerCanPressReset();
-            Intent resultIntent = new Intent();
-            resultIntent.putExtra(MainMenu.MESSAGE_STAT, stats);
-            setResult(Activity.RESULT_OK, resultIntent);
-            finish();
+            finishMultiPlayer();
             return true;
         }
 
@@ -173,6 +173,15 @@ public class MultiPlayer extends FileManager {
                 resultTxt.setText("Something went very wrong... Try again.");
                 break;
         }
+    }
+
+    private void finishMultiPlayer() {
+        saveStats();
+        MpHelper.getInstance().playerCanPressReset();
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra(MainMenu.MESSAGE_STAT, stats);
+        setResult(Activity.RESULT_OK, resultIntent);
+        finish();
     }
 
 }

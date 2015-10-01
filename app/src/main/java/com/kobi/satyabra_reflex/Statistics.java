@@ -44,6 +44,11 @@ public class Statistics extends FileManager {
     }
 
     @Override
+    public void onBackPressed() {
+        finishStats();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -54,12 +59,7 @@ public class Statistics extends FileManager {
         if (id == R.id.action_settings) {
             return true;
         } else if (id == android.R.id.home) {
-            saveStats();
-            MpHelper.getInstance().playerCanPressReset();
-            Intent resultIntent = new Intent();
-            resultIntent.putExtra(MainMenu.MESSAGE_STAT, stats);
-            setResult(Activity.RESULT_OK, resultIntent);
-            finish();
+            finishStats();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -83,6 +83,14 @@ public class Statistics extends FileManager {
         saveStats();
         TextView text = (TextView) findViewById(R.id.textStatistics);
         text.setText(writeStatistics());
+    }
+
+    private void finishStats() {
+        saveStats();
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra(MainMenu.MESSAGE_STAT, stats);
+        setResult(Activity.RESULT_OK, resultIntent);
+        finish();
     }
 
     private String writeStatistics() {
@@ -126,27 +134,27 @@ public class Statistics extends FileManager {
 
         // Multiplayer Buzzer
         text += getString(R.string.stat_buzzer_counts) + "\n  ";
-        text += getString(R.string.stat_2pmode) + "\n    ";
+        text += getString(R.string.stat_2pmode) + "\n      ";
         text += getString(R.string.stat_1p) + " ";
-        text += stats.getBuzzerCount(StatsManager.BuzzId.p21).toString() + "\n    ";
+        text += stats.getBuzzerCount(StatsManager.BuzzId.p21).toString() + "\n      ";
         text += getString(R.string.stat_2p) + " ";
         text += stats.getBuzzerCount(StatsManager.BuzzId.p22).toString() + "\n  ";
-        text += getString(R.string.stat_3pmode) + "\n    ";
+        text += getString(R.string.stat_3pmode) + "\n      ";
         text += getString(R.string.stat_1p) + " ";
-        text += stats.getBuzzerCount(StatsManager.BuzzId.p31).toString() + "\n    ";
+        text += stats.getBuzzerCount(StatsManager.BuzzId.p31).toString() + "\n      ";
         text += getString(R.string.stat_2p) + " ";
-        text += stats.getBuzzerCount(StatsManager.BuzzId.p32).toString() + "\n    ";
+        text += stats.getBuzzerCount(StatsManager.BuzzId.p32).toString() + "\n      ";
         text += getString(R.string.stat_3p) + " ";
         text += stats.getBuzzerCount(StatsManager.BuzzId.p33).toString() + "\n  ";
-        text += getString(R.string.stat_4pmode) + "\n    ";
+        text += getString(R.string.stat_4pmode) + "\n      ";
         text += getString(R.string.stat_1p) + " ";
-        text += stats.getBuzzerCount(StatsManager.BuzzId.p41).toString() + "\n    ";
+        text += stats.getBuzzerCount(StatsManager.BuzzId.p41).toString() + "\n      ";
         text += getString(R.string.stat_2p) + " ";
-        text += stats.getBuzzerCount(StatsManager.BuzzId.p42).toString() + "\n    ";
+        text += stats.getBuzzerCount(StatsManager.BuzzId.p42).toString() + "\n      ";
         text += getString(R.string.stat_3p) + " ";
-        text += stats.getBuzzerCount(StatsManager.BuzzId.p43).toString() + "\n    ";
+        text += stats.getBuzzerCount(StatsManager.BuzzId.p43).toString() + "\n      ";
         text += getString(R.string.stat_4p) + " ";
-        text += stats.getBuzzerCount(StatsManager.BuzzId.p44).toString() + "\n  ";
+        text += stats.getBuzzerCount(StatsManager.BuzzId.p44).toString() + "\n";
         return text;
     }
 

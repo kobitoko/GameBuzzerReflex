@@ -21,6 +21,7 @@ import android.view.WindowManager;
  * http://www.mkyong.com/android/android-imageview-example/
  * http://stackoverflow.com/questions/2139134/how-to-send-an-object-from-one-android-activity-to-another-using-intents
  * http://stackoverflow.com/questions/920306/sending-data-back-to-the-main-activity-in-android
+ * http://stackoverflow.com/questions/8094715/how-to-catch-event-with-hardware-back-button-on-android
  * http://developer.android.com/reference/android/os/Parcelable.html
  * http://stackoverflow.com/questions/10757598/what-classloader-to-use-with-parcel-readhashmap
  * http://developer.android.com/reference/android/os/SystemClock.html
