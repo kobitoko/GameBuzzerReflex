@@ -7,10 +7,10 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+
 /**
- * Created by Ryan on 2015-09-26.
- * Taken from http://developer.android.com/guide/topics/ui/dialogs.html
- * with minor edits
+ * SinglePlayerDiag class displays the instruction for singleplayer mode.
+ * Class template taken from Androids http://developer.android.com/guide/topics/ui/dialogs.html
  */
 public class SinglePlayerDiag extends DialogFragment {
     @Override

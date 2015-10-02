@@ -8,8 +8,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * MultiPlayer class's purpose is to provide the Button functionalities and show the
+ * different screens of the MultiPlayer game state.
+ * It saves the results to file too after a player's buzzer button was pressed.
+ * It also passes on a copy of its StatsManager object to the parent activity upon finishing.
+ */
 public class MultiPlayer extends FileManager {
 
     private ActionBar actionBar;
@@ -19,14 +26,19 @@ public class MultiPlayer extends FileManager {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Receive the StatsManager object from the parent activity and replace the local one with it.
         Intent intent = getIntent();
         stats = intent.getParcelableExtra(MainMenu.MESSAGE_STAT);
 
+        // initialize the playerNum with the amount of players gotten from MpHelper.
         playerNums = MpHelper.getInstance().getPlayerNumbers();
+
         setViewButtons();
 
+        // Hide the status bar of the android's OS.
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                              WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        // Change texts in the action bar and enable the back button to the parent activity.
         actionBar = getActionBar();
         actionBar.setTitle(R.string.app_title);
         actionBar.setSubtitle(R.string.app_subtitle_multiplayer);
@@ -41,6 +53,7 @@ public class MultiPlayer extends FileManager {
         return true;
     }
 
+    // Exit this activity when the hardware back button was pressed.
     @Override
     public void onBackPressed() {
         finishMultiPlayer();
@@ -53,10 +66,10 @@ public class MultiPlayer extends FileManager {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         } else if (id == android.R.id.home) {
+            // Exit this activity when the action bar back button was pressed.
             finishMultiPlayer();
             return true;
         }
@@ -64,7 +77,10 @@ public class MultiPlayer extends FileManager {
         return super.onOptionsItemSelected(item);
     }
 
-    // Button functions ---------------------------
+    //------------------------ Button Methods ------------------------------
+    // buttonPx where x is the player, these function increase a button press counter in the
+    // StatsManager object and change the view to the result page.
+    // resetMp resets the MpHelper-singleton's values and changes the view back to the buttons view.
 
     public void buttonP1(View view) {
         switch(playerNums) {
@@ -99,7 +115,7 @@ public class MultiPlayer extends FileManager {
         if(MpHelper.getInstance().playerCanPress()) {
             MpHelper.getInstance().setPlayerFirst(2);
             showResults();
-     }
+        }
     }
 
     public void buttonP3(View view) {
@@ -133,7 +149,9 @@ public class MultiPlayer extends FileManager {
         setViewButtons();
     }
 
-    //-------
+    //------------------------ Helper Methods ------------------------------
+
+    // Changes the view to the correct view depending on the amount of players.
     private void setViewButtons() {
         switch (playerNums) {
             case 2:
@@ -151,6 +169,7 @@ public class MultiPlayer extends FileManager {
         }
     }
 
+    // Saves the StatsManager object into file and changes the view to show results of which player pressed first.
     private void showResults() {
         saveStats();
         setContentView(R.layout.activity_multi_player_results);
@@ -175,6 +194,8 @@ public class MultiPlayer extends FileManager {
         }
     }
 
+    // Saves the StatsManager object into file, resets the MpHelper for future use, and passes the
+    // StatsManager object back to the parent activity before exiting.
     private void finishMultiPlayer() {
         saveStats();
         MpHelper.getInstance().playerCanPressReset();

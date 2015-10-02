@@ -8,9 +8,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 
 /**
- * Created by Ryan on 2015-09-28.
- * Taken from http://developer.android.com/guide/topics/ui/dialogs.html
- * with minor edits
+ * MultiplayerDiag class gets the input from the user and stores the result in to the MpHelper singleton.
+ * Class template taken from Androids http://developer.android.com/guide/topics/ui/dialogs.html
  */
 public class MultiplayerDiag extends DialogFragment {
     @Override

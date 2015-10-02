@@ -1,8 +1,9 @@
 package com.kobi.satyabra_reflex;
 
 /**
- * Created by kobitoko on 27/09/15.
- * Simple Singleton
+ * MpHelper class is a singleton that helps whoese purpose is to help the MultiPlayer
+ * for storing and retrieving the amount of players playing, and which player
+ * was the first to press, as well to keep track of the button's state.
  */
 public class MpHelper {
 
@@ -11,8 +12,10 @@ public class MpHelper {
     private Integer playerFirst = 0;
     private Boolean playerCanPress = Boolean.TRUE;
 
-    private MpHelper() {}
+    // Prevents a new instance being created.
+    private MpHelper() { }
 
+    // Retrieve the single instance from the class.
     public static MpHelper getInstance() {
         return instance;
     }

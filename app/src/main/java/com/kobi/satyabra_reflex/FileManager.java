@@ -13,13 +13,16 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 /**
- * Created by kobitoko on 29/09/15.
+ * FileManagager Class's purpose is to provide write and read JSON functions
+ * and access to the StatsManager object.
+ * Also provide Activity inheritance for it's subclasses.
  */
 public class FileManager extends Activity {
 
     protected StatsManager stats;
     private static final String FILENAME = "stats.dat";
 
+    // Saves StatsManager Object into a JSON file.
     public void saveStats() {
         try {
             FileOutputStream fos = openFileOutput(FILENAME, MODE_PRIVATE);
@@ -35,6 +38,7 @@ public class FileManager extends Activity {
         }
     }
 
+    // Loads from a JSON file into the local StatsManager Object.
     public void loadStats() {
         try {
             FileInputStream fis = openFileInput(FILENAME);

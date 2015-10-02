@@ -32,8 +32,15 @@ import android.view.WindowManager;
  * http://developer.android.com/guide/topics/resources/drawable-resource.html#StateList
  * Cmput 301 Labs for Gson saving.
  */
+
+/**
+ * MainMenu class purpose is to provide buttons of the main menu so the user can navigate to
+ * the different activities of the app, as well as creating the necessary dialog pop-ups
+ * before launching the activity.
+ * It also passes on a copy of its StatsManager object to the launching activity.
+ */
 public class MainMenu extends FileManager implements SinglePlayerDiag.NoticeDialogListener,
-                                                         MultiplayerDiag.MpDialogListener {
+        MultiplayerDiag.MpDialogListener {
 
     private ActionBar actionBar;
     public final static String MESSAGE_STAT = new String("com.kobi.satyabra_reflex.MESSAGE_STAT");
@@ -47,10 +54,10 @@ public class MainMenu extends FileManager implements SinglePlayerDiag.NoticeDial
         stats = new StatsManager();
         loadStats();
 
-        //hiding status bar https://developer.android.com/training/system-ui/status.html
+        // Hiding status bar, taken from https://developer.android.com/training/system-ui/status.html
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        // https://developer.android.com/guide/topics/ui/actionbar.html
+        // Change the text of the action bar
         actionBar = getActionBar();
         actionBar.setTitle(R.string.app_title);
         actionBar.setSubtitle(R.string.app_subtitle_menu);
@@ -81,32 +88,54 @@ public class MainMenu extends FileManager implements SinglePlayerDiag.NoticeDial
     }
 
     @Override
-    //Taken from Reto Meier's and jimmithy's answer
-    //from http://stackoverflow.com/questions/920306/sending-data-back-to-the-main-activity-in-android
+    // Gets the StatsManager object from the child-activity which then replaces its own local StatsManager object.
+    // Taken from Reto Meier's and jimmithy's answer
+    // at http://stackoverflow.com/questions/920306/sending-data-back-to-the-main-activity-in-android
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == RESULT_STAT && resultCode == Activity.RESULT_OK) {
+        if (requestCode == RESULT_STAT && resultCode == Activity.RESULT_OK) {
             stats = data.getParcelableExtra(MESSAGE_STAT);
         }
     }
 
-    // Dialog -------------------------------------------
+    //------------------------ Button Methods ------------------------------
 
+    public void startSingleplayer(View view) {
+        showInstructionDialog();
+    }
+
+    public void startMultiplayer(View view) {
+        showPlayerAmountAskDialog();
+    }
+
+    // Passes on the local StatsManager object to the Statistics activity.
+    public void startStatistics(View view) {
+        Intent intent = new Intent(this, Statistics.class);
+        intent.putExtra(MESSAGE_STAT, stats);
+        startActivityForResult(intent, RESULT_STAT);
+    }
+
+    //------------------------ Dialog Methods ------------------------------
+
+    // Create an instruction dialog using the SinglePlayerDiag class
     public void showInstructionDialog() {
         // Create an instance of the dialog fragment and show it
         DialogFragment dialog = new SinglePlayerDiag();
         dialog.show(getFragmentManager(), DIAG_INSTRUCT);
     }
 
+    // Creates a multiplayer dialog using MuliplayerDiag class
     public void showPlayerAmountAskDialog() {
         DialogFragment dialog = new MultiplayerDiag();
         dialog.show(getFragmentManager(), DIAG_MP_PLAYERS);
     }
 
+    // Receives the result from the dialog and passes on the local StatsManager object to the launching activity.
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
-        // User touched the dialog's positive button
-        if(dialog.getTag() == DIAG_INSTRUCT) {
+        // User touched the dialog's positive button and
+        // pass on the local StatsManager object to the launching Activity
+        if (dialog.getTag() == DIAG_INSTRUCT) {
             Intent intent = new Intent(this, SinglePlayer.class);
             intent.putExtra(MESSAGE_STAT, stats);
             startActivityForResult(intent, RESULT_STAT);
@@ -115,20 +144,6 @@ public class MainMenu extends FileManager implements SinglePlayerDiag.NoticeDial
             intent.putExtra(MESSAGE_STAT, stats);
             startActivityForResult(intent, RESULT_STAT);
         }
-    }
-
-    // Buttons -------------------------------------------
-
-    public void startSingleplayer(View view) {
-        showInstructionDialog();
-    }
-
-    public void startMultiplayer(View view) { showPlayerAmountAskDialog(); }
-
-    public void startStatistics(View view) {
-        Intent intent = new Intent(this, Statistics.class);
-        intent.putExtra(MESSAGE_STAT, stats);
-        startActivityForResult(intent, RESULT_STAT);
     }
 
 }
