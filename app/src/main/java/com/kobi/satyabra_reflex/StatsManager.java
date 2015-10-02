@@ -15,8 +15,6 @@ public class StatsManager implements Parcelable {
     private ArrayList<Integer> reactionTimes;
     private HashMap<BuzzId, Integer> buzzerCounts;
 
-    public static final String FILENAME = "stats.dat";
-
     public enum BuzzId{p41,p42,p43,p44,
         p31,p32,p33,
         p21,p22}

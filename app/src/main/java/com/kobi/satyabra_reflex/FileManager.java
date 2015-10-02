@@ -18,10 +18,11 @@ import java.io.OutputStreamWriter;
 public class FileManager extends Activity {
 
     protected StatsManager stats;
+    private static final String FILENAME = "stats.dat";
 
     public void saveStats() {
         try {
-            FileOutputStream fos = openFileOutput(StatsManager.FILENAME, MODE_PRIVATE);
+            FileOutputStream fos = openFileOutput(FILENAME, MODE_PRIVATE);
             OutputStreamWriter writer = new OutputStreamWriter(fos);
             Gson gson = new Gson();
             gson.toJson(stats, writer);
@@ -36,7 +37,7 @@ public class FileManager extends Activity {
 
     public void loadStats() {
         try {
-            FileInputStream fis = openFileInput(StatsManager.FILENAME);
+            FileInputStream fis = openFileInput(FILENAME);
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
             Gson gson = new Gson();
             stats = gson.fromJson(in, StatsManager.class);
