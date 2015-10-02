@@ -39,3 +39,10 @@ Thumbs.db
 
 # ubuntu tmp edits
 *~
+
+# dia format for the UML.
+*.dia
+
+# ignore art folder containing their gimp files.
+artAssest/
+
