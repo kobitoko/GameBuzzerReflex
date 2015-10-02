@@ -11,6 +11,10 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * Statistics class purpose is to visually show the statistics to the user and provide a way to
+ * email the statistics and clear the data.
+ */
 public class Statistics extends FileManager {
 
     private ActionBar actionBar;
@@ -22,19 +26,23 @@ public class Statistics extends FileManager {
 
         calc = new StatsCalculator();
 
+        // Receive the StatsManager object from the parent activity and replace the local one with it.
         Intent intent = getIntent();
         stats = intent.getParcelableExtra(MainMenu.MESSAGE_STAT);
 
         setContentView(R.layout.activity_statistics);
 
+        // Hide the status bar of the android's OS.
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        // Change texts in the action bar and enable the back button to the parent activity.
         actionBar = getActionBar();
         actionBar.setTitle(R.string.app_title);
         actionBar.setSubtitle(R.string.app_subtitle_stats);
         actionBar.setHomeButtonEnabled(Boolean.TRUE);
         actionBar.setDisplayHomeAsUpEnabled(Boolean.TRUE);
 
+        // Write the statistics to the text-view.
         TextView text = (TextView) findViewById(R.id.textStatistics);
         text.setText(writeStatistics());
     }
@@ -46,6 +54,7 @@ public class Statistics extends FileManager {
         return true;
     }
 
+    // Exit this activity when the hardware back button was pressed.
     @Override
     public void onBackPressed() {
         finishStats();
@@ -62,14 +71,16 @@ public class Statistics extends FileManager {
         if (id == R.id.action_settings) {
             return true;
         } else if (id == android.R.id.home) {
+            // Exit this activity when the action bar back button was pressed.
             finishStats();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    // Launches the users email app and puts the statistics in there, ready to be send off.
     public void buttonEmail(View view) {
-        // Taken from http://stackoverflow.com/questions/2197741/how-can-i-send-emails-from-my-android-application
+        // Taken from Jeremy Logan's answer at http://stackoverflow.com/questions/2197741/how-can-i-send-emails-from-my-android-application
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("message/rfc822");
         i.putExtra(Intent.EXTRA_SUBJECT, "Game Buzzer Coach statistics");
@@ -81,6 +92,7 @@ public class Statistics extends FileManager {
         }
     }
 
+    // clears all the data in StatsManager and saves it to file.
     public void buttonClearStats(View view) {
         stats.clearStatistics();
         saveStats();
@@ -96,6 +108,7 @@ public class Statistics extends FileManager {
         finish();
     }
 
+    // Writes all the statistics into a String.
     private String writeStatistics() {
         String text = new String();
 
@@ -158,6 +171,7 @@ public class Statistics extends FileManager {
         text += stats.getBuzzerCount(StatsManager.BuzzId.p43).toString() + "\n      ";
         text += getString(R.string.stat_4p) + " ";
         text += stats.getBuzzerCount(StatsManager.BuzzId.p44).toString() + "\n";
+
         return text;
     }
 

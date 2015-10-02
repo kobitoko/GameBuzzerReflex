@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * Created by kobitoko on 30/09/15.
+ * StatsCalculator calculates statistics for Average times, Median times, Minimum, and Maximum.
+ * All for the entire ArrayList, and for the top 100 and top 10 entries in the ArrayList.
  */
 public class StatsCalculator {
 
-    // Average Times ---------------------------------------------
+    //------------------------ Average Times ---------------------------------------------
 
     public Integer getAverageReaction(ArrayList<Integer> reactionTimes) {
         if(reactionTimes.size() == 0)
@@ -44,7 +45,7 @@ public class StatsCalculator {
         return Math.round(allValues / 100);
     }
 
-    // Median Times ---------------------------------------------
+    //------------------------ Median Times ---------------------------------------------
 
     public Integer getMedianReaction(ArrayList<Integer> reactionTimes) {
         if(reactionTimes.size() == 0)
@@ -113,7 +114,7 @@ public class StatsCalculator {
         return medianVal;
     }
 
-    // Minimum times ---------------------------------------------
+    //------------------------ Minimum times ---------------------------------------------
 
     public Integer getFastestReaction(ArrayList<Integer> reactionTimes) {
         if(reactionTimes.size() == 0)
@@ -152,7 +153,7 @@ public class StatsCalculator {
         return lowestVal;
     }
 
-    // Maximum times ---------------------------------------------
+    //------------------------ Maximum times ---------------------------------------------
 
     public Integer getSlowestReaction(ArrayList<Integer> reactionTimes) {
         if(reactionTimes.size() == 0)
