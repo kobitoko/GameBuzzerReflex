@@ -1,3 +1,19 @@
+/********************************************************************************
+ Copyright 2015 Ryan Satyabrata
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ *********************************************************************************/
+
 package com.kobi.satyabra_reflex;
 
 import android.os.Bundle;
@@ -28,14 +44,14 @@ public class StatsManager implements Parcelable {
     // Allows StatsManager to be passable through an intent.
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        // Taken from's hdort answer http://stackoverflow.com/questions/10757598/what-classloader-to-use-with-parcel-readhashmap
+        // Taken from Stack Overflow: David Wasser's answer http://stackoverflow.com/questions/10757598/what-classloader-to-use-with-parcel-readhashmap
         Bundle bundle = new Bundle();
         bundle.putSerializable("reactionTimes", reactionTimes);
         bundle.putSerializable("buzzerCounts", buzzerCounts);
         dest.writeBundle(bundle);
     }
 
-    // Taken from fiXedd's answer http://stackoverflow.com/questions/2139134/how-to-send-an-object-from-one-android-activity-to-another-using-intents
+    // Taken from Stack Overflow: fiXedd's answer http://stackoverflow.com/questions/2139134/how-to-send-an-object-from-one-android-activity-to-another-using-intents
     public static final Parcelable.Creator<StatsManager> CREATOR = new Parcelable.Creator<StatsManager>() {
         public StatsManager createFromParcel(Parcel in) {
             return new StatsManager(in);
@@ -52,10 +68,10 @@ public class StatsManager implements Parcelable {
         buzzerCounts = new HashMap<BuzzId, Integer>(10);
     }
 
-    // Taken from fiXedd's answer http://stackoverflow.com/questions/2139134/how-to-send-an-object-from-one-android-activity-to-another-using-intents
+    // Taken from Stack Overflow: fiXedd's answer http://stackoverflow.com/questions/2139134/how-to-send-an-object-from-one-android-activity-to-another-using-intents
     // Constructor that takes a Parcel and gives you an object populated with it's values
     private StatsManager(Parcel in) {
-        // Taken from's hdort answer http://stackoverflow.com/questions/10757598/what-classloader-to-use-with-parcel-readhashmap
+        // Taken from Stack Overflow: David Wasser's answer http://stackoverflow.com/questions/10757598/what-classloader-to-use-with-parcel-readhashmap
         Bundle bundle = in.readBundle();
         reactionTimes = (ArrayList<Integer>) bundle.getSerializable("reactionTimes");
         buzzerCounts = (HashMap<BuzzId, Integer>) bundle.getSerializable("buzzerCounts");

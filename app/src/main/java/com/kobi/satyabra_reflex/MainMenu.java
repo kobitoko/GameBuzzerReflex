@@ -1,3 +1,19 @@
+/********************************************************************************
+ Copyright 2015 Ryan Satyabrata
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ *********************************************************************************/
+
 package com.kobi.satyabra_reflex;
 
 import android.app.ActionBar;
@@ -9,29 +25,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-
-/**
- * References sofar:
- * https://developer.android.com/guide/topics/ui/actionbar.html
- * http://developer.android.com/guide/topics/ui/dialogs.html
- * http://docs.oracle.com/javase/7/docs/api/java/util/Vector.html
- * http://docs.oracle.com/javase/7/docs/api/java/util/HashMap.html
- * To show back button on action bar, dymmeh's answer:
- * http://stackoverflow.com/questions/14483393/how-do-i-change-the-android-actionbar-title-and-icon
- * http://www.mkyong.com/android/android-imageview-example/
- * http://stackoverflow.com/questions/2139134/how-to-send-an-object-from-one-android-activity-to-another-using-intents
- * http://stackoverflow.com/questions/920306/sending-data-back-to-the-main-activity-in-android
- * http://stackoverflow.com/questions/8094715/how-to-catch-event-with-hardware-back-button-on-android
- * http://developer.android.com/reference/android/os/Parcelable.html
- * http://stackoverflow.com/questions/10757598/what-classloader-to-use-with-parcel-readhashmap
- * http://developer.android.com/reference/android/os/SystemClock.html
- * http://stackoverflow.com/questions/14295150/update-activity-constantly
- * http://developer.android.com/reference/android/os/Handler.html
- * http://stackoverflow.com/questions/2197741/how-can-i-send-emails-from-my-android-application
- * For Button presses anim
- * http://developer.android.com/guide/topics/resources/drawable-resource.html#StateList
- * Cmput 301 Labs for Gson saving.
- */
 
 /**
  * MainMenu class purpose is to provide buttons of the main menu so the user can navigate to
@@ -54,7 +47,7 @@ public class MainMenu extends FileManager implements SinglePlayerDiag.NoticeDial
         stats = new StatsManager();
         loadStats();
 
-        // Hiding status bar, taken from https://developer.android.com/training/system-ui/status.html
+        // Hiding status bar, taken from Android Documentation: https://developer.android.com/training/system-ui/status.html
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         // Change the text of the action bar
@@ -89,8 +82,8 @@ public class MainMenu extends FileManager implements SinglePlayerDiag.NoticeDial
 
     @Override
     // Gets the StatsManager object from the child-activity which then replaces its own local StatsManager object.
-    // Taken from Reto Meier's and jimmithy's answer
-    // at http://stackoverflow.com/questions/920306/sending-data-back-to-the-main-activity-in-android
+    // Taken from Stack Overflow: Reto Meier's and jimmithy's answer at
+    // http://stackoverflow.com/questions/920306/sending-data-back-to-the-main-activity-in-android
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_STAT && resultCode == Activity.RESULT_OK) {

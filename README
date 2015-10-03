@@ -1,0 +1,65 @@
+
+
+Attribution:
+
+    University of Alberta Cmput 301 Labs for using Gson to save files.
+
+    Android Documentation:
+        http://developer.android.com/reference/android/os/Parcelable.html
+        http://developer.android.com/reference/android/os/SystemClock.html
+        http://developer.android.com/reference/android/os/Handler.html
+        http://developer.android.com/guide/topics/resources/drawable-resource.html#StateList
+
+    Stack Overflow:
+
+    http://stackoverflow.com/questions/14483393/how-do-i-change-the-android-actionbar-title-and-icon
+        Question by Allan Ramírez http://stackoverflow.com/users/788205/allan-ram%C3%ADrez
+        Answer used by dymmeh http://stackoverflow.com/users/634474/dymmeh
+
+    http://stackoverflow.com/questions/2139134/how-to-send-an-object-from-one-android-activity-to-another-using-intents
+        Question by UMAR http://stackoverflow.com/users/249991/umar
+        Answer used by fiXedd http://stackoverflow.com/users/76835/jeremy-logan
+        
+    http://stackoverflow.com/questions/920306/sending-data-back-to-the-main-activity-in-android
+        Question by Rajapandian http://stackoverflow.com/users/111436/rajapandian
+        Answer used by Reto Meier http://stackoverflow.com/users/822/reto-meier
+        and jimmithy http://stackoverflow.com/users/1299623/jimmithy
+        
+    http://stackoverflow.com/questions/8094715/how-to-catch-event-with-hardware-back-button-on-android
+        Question by Damir http://stackoverflow.com/users/486578/damir
+        Answer used by pratik http://stackoverflow.com/users/760489/pratik
+        
+    http://stackoverflow.com/questions/10757598/what-classloader-to-use-with-parcel-readhashmap
+        Question by hdort http://stackoverflow.com/users/389582/hdort
+        Answer used by David Wasser http://stackoverflow.com/users/769265/david-wasser
+        
+    http://stackoverflow.com/questions/14295150/update-activity-constantly
+        Question by user1050389 http://stackoverflow.com/users/1050389/user1050389
+        Answer used by ρяσѕρєя K http://stackoverflow.com/users/1202025/%CF%81%D1%8F%CF%83%D1%95%CF%81%D1%94%D1%8F-k
+        
+    http://stackoverflow.com/questions/2197741/how-can-i-send-emails-from-my-android-application
+        Question by Rakesh http://stackoverflow.com/users/138030/rakesh
+        Answer used by Jeremy Logan http://stackoverflow.com/users/76835/jeremy-logan
+
+Licenses:
+
+Stack Overflow code snippets are licensed by cc-wiki aka cc-by-sA:
+http://creativecommons.org/licenses/by-sa/3.0/
+
+-----------------------
+
+Copyright 2015 Ryan Satyabrata
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+
