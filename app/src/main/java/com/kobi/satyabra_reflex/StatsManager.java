@@ -8,13 +8,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Created by kobitoko on 20/09/15.
+ * StatsManager is to hold the data of the statistics, reaction times and button presses. Also to provide manipulations to it's data.
  */
 public class StatsManager implements Parcelable {
 
     private ArrayList<Integer> reactionTimes;
     private HashMap<BuzzId, Integer> buzzerCounts;
 
+    // The identity for the Player Buzzers. pXY, where X is the amount of players, and Y is the player's identity.
     public enum BuzzId{p41,p42,p43,p44,
         p31,p32,p33,
         p21,p22}
@@ -24,6 +25,7 @@ public class StatsManager implements Parcelable {
         return 0;
     }
 
+    // Allows StatsManager to be passable through an intent.
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         // Taken from's hdort answer http://stackoverflow.com/questions/10757598/what-classloader-to-use-with-parcel-readhashmap
@@ -44,6 +46,7 @@ public class StatsManager implements Parcelable {
         }
     };
 
+    // Initialize the data.
     public StatsManager() {
         reactionTimes = new ArrayList<Integer>(100);
         buzzerCounts = new HashMap<BuzzId, Integer>(10);
@@ -58,20 +61,21 @@ public class StatsManager implements Parcelable {
         buzzerCounts = (HashMap<BuzzId, Integer>) bundle.getSerializable("buzzerCounts");
     }
 
-    // Gets the reaction time from the reaction time records which contains 100 records.
+    // Gets the reaction time from the reaction time records. Throws when invalid index is given.
     public Integer getReactionTime(Integer index) throws RuntimeException {
-        if(index < 0) {
-            String e = "StatsManager class method getReactionTime index has to be positive. Index is: " + index.toString();
+        if(index < 0 || index >= reactionTimes.size()) {
+            String e = "StatsManager class method getReactionTime index has to be positive, and less than container's size. Index is: " + index.toString();
             throw new RuntimeException(e);
         }
         return reactionTimes.get(index);
     }
 
-    // adds a reaction time to the reaction time records.
+    // Adds a reaction time to the reaction time records.
     public void addReactionTime(Integer newReactionTime) {
         reactionTimes.add(0, newReactionTime);
     }
 
+    // Retrieve the reaction time records.
     public ArrayList<Integer> getReactionTimesList() {
         return reactionTimes;
     }
@@ -92,13 +96,14 @@ public class StatsManager implements Parcelable {
         buzzerCounts.put(BuzzId, counts);
     }
 
+    // Retrieve the buzzer count presses.
     public HashMap<BuzzId, Integer> getBuzzerCountMap() {
         return buzzerCounts;
     }
 
+    // Clear all the data.
     public void clearStatistics() {
         reactionTimes.clear();
         buzzerCounts.clear();
     }
-
 }
